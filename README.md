@@ -11,7 +11,6 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - Make a public commitment to the challenge (e.g. tweet, blog post, etc.)
 - Share my progress every day (e.g. tweet, blog post, etc.)
 
-
 ## Progress
 
 wow such empty
