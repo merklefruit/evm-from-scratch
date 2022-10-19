@@ -10,7 +10,7 @@ Ok here we go!
   - their [about section](https://evm.codes/about) has a general EVM overview which I found amazing.
   - their [EVM playground tool](https://www.evm.codes/playground) is an incredibly useful interactive debugger.
 - [ethereum yellow paper](https://ethereum.github.io/yellowpaper/paper.pdf): this is the EVM bible, pretty much.
-- [ethereum-js](https://github.com/ethereumjs/ethereumjs-monorepo): repo that contains the official Typescript EVM implementation.
+- [ethereum beige paper](https://github.com/chronaeon/beigepaper/blob/master/beigepaper.pdf): A more friendly version of the yellow paper with easier syntax.
 - [evm from scratch series](https://karmacoma.notion.site/Building-an-EVM-from-scratch-series-90ee3c827b314e0599e705a1152eecf9): a Python implementation of the yellow paper.
 - [crypto dev hub EVM tutorials](https://cryptodevhub.io/ethereum-virtual-machine-tutorials): this page might have useful resources, although most of these seem more production-oriented rather than low-level EVM.
 

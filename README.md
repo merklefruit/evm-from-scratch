@@ -13,4 +13,5 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 
 ## Progress
 
-wow such empty
+- [x] [Day 0](./day00.md): Research of relevant learning material & tools to get started
+- [x] [Day 1](./day01.md): Getting started with the evm-from-scratch set of challenges
