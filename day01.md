@@ -34,7 +34,7 @@ Other than the **stack**, each transaction execution context has different data 
 
 The execution context isn't the only slice of state that is managed by the EVM. The job of the EVM is to ultimately update the global Ethereum state one transaction at a time. Here's how the Ethereum state works:
 
-- the top level is the **world state** which is a key-value store that maps addresses to accounts. Each 160-bit address is associated with an **account** comprised of an ether balance, a nonce, the storage (only used by smart contract addresses), and the program code (also only used by smart contract addresses). An EOA (externally-owned account) will always have no code and an empty storage.
+The top level is the **world state** which is a key-value store that maps addresses to accounts. Each 160-bit address is associated with an **account** comprised of an ether balance, a nonce, the storage (only used by smart contract addresses), and the program code (also only used by smart contract addresses). An EOA (externally-owned account) will always have no code and an empty storage.
 
 If a user transfers ETH to another user, there is no need to involve the EVM at all. The transaction will simply update the balance of the sender and the recipient in the world state. However, if a user wants to interact with a smart contract, the EVM is instantiated with all the information required in relation to the specific transaction being created. The transaction will also update the storage and the code of the smart contract account.
 
