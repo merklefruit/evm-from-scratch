@@ -1,4 +1,4 @@
-# day 1
+# Day 1
 
 Today I collected a few resources that will be useful along the way, mainly focusing on existing reference EVM implementations in different languages as well as some generic (non ethereum-specific) stack-based VMs. I also started reading chapter 13 of Mastering Ethereum in detail.
 
@@ -20,7 +20,7 @@ Today I collected a few resources that will be useful along the way, mainly focu
 - [stack-VM](https://github.com/NishanthSpShetty/Stack-VM): Rust
 - [crianza](https://github.com/cslarsen/crianza): Python
 
-## Mastering Ethereum chapter 13: The EVM
+## Mastering Ethereum chapter 13: The EVM (reading notes)
 
 The EVM is a computation engine similar to interpreters of other bytecode-compiled languages such as Java. When you want to run a Java program, you have to compile it first. Then you can run the compiled bytecode on the Java Virtual Machine (JVM). The term **virtual machine** here refers to the fact that the evm software is independent of the underlying hardware. It is a software abstraction that allows you to run the same program on different hardware architectures.
 

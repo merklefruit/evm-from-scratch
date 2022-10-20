@@ -1,7 +1,7 @@
 import { expect, test } from "@jest/globals"
-import evm from "./evm"
-import tests from "../evm.json"
-import type { Test } from "./types"
+import evm from "."
+import tests from "./evm.json"
+import type { Test } from "./src/types"
 
 for (const t of tests as Test[]) {
   test(t.name, () => {
