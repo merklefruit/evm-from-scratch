@@ -3,7 +3,7 @@ import { Opcode, OpcodeRunner } from "./types"
 type Runners = Record<Opcode, { name: string; runner: OpcodeRunner }>
 
 // 0x00
-function STOP() {
+function STOP(ms) {
   throw new Error("STOP")
 }
 

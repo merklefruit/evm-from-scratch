@@ -1,3 +1,5 @@
+export type ProgramCounter = number
+
 export interface Code {
   asm: string
   bin: string

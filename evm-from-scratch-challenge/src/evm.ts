@@ -1,8 +1,16 @@
+import Memory from "./memory"
+import Stack from "./stack"
+
 export default class EVM {
-  private _stack: bigint[] = []
-  private _memory: Uint8Array = new Uint8Array(0)
+  private _stack: Stack
+  private _memory: Memory
   private _storage: Map<BigInt, BigInt> = new Map()
   private _pc: number = 0
+
+  constructor() {
+    this._stack = new Stack()
+    this._memory = new Memory()
+  }
 
   public async run(code: Uint8Array) {
     const pc = 0
@@ -18,7 +26,9 @@ export default class EVM {
       break
     }
 
-    return { stack: [] }
+    const result = { stack: this._stack }
+
+    return result
   }
 
   // Execute a single opcode and update the stack
