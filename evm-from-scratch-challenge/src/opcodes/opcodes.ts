@@ -1,8 +1,17 @@
-import { Opcode, OpcodeInfo } from "./types"
+import runners from "./runners"
 
-const opcodes: Record<Opcode, OpcodeInfo> = {
-  // 0x00 - arithmetic
-  0x00: { name: "STOP" },
-  0x01: { name: "ADD" },
-  0x02: { name: "MUL" },
+export function getOpcodeNameFromHex(hex: number): string {
+  return runners[hex]?.name
+}
+
+export function getOpcodeHexFromName(name: string): number {
+  for (const [hex, { name: opcodeName }] of Object.entries(runners)) {
+    if (opcodeName === name) return parseInt(hex)
+  }
+
+  throw new Error(`Opcode ${name} not found`)
+}
+
+export function getImplementedOpcodes(): string[] {
+  return Object.values(runners).map((r) => r.name)
 }

@@ -1,6 +1,9 @@
 import { expect, test } from "@jest/globals"
+
 import evm from "."
 import tests from "./evm.json"
+import { hexStringToUint8Array } from "./src/utils"
+
 import type { Test } from "./src/types"
 
 for (const t of tests as Test[]) {
@@ -12,8 +15,4 @@ for (const t of tests as Test[]) {
 
     expect(result.stack).toEqual(t.expect.stack.map((item) => BigInt(item)))
   })
-}
-
-function hexStringToUint8Array(hexString: string) {
-  return new Uint8Array((hexString?.match(/../g) || []).map((byte) => parseInt(byte, 16)))
 }
