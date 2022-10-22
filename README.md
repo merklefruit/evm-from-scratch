@@ -15,3 +15,6 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 
 - [x] [Day 0](./day00.md): Research of relevant learning material & tools to get started
 - [x] [Day 1](./day01.md): Gathering more resources & reading Mastering Ethereum chapter 13
+- [x] [Day 2](./day02.md): Setting up the EVM-from-scratch challenge & EVM class
+- [x] [Day 3](./day03.md): Reading the yellow paper & EVM inception (EVM inside EVM)
+- [x] [Day 4](./day04.md): Stack & memory implementation & first OPCODEs
