@@ -48,14 +48,13 @@ export default class EVM {
       try {
         await this.execute(opcode)
       } catch (err: any) {
-        if (err.message === ERRORS.STOP) {
-          console.log("STOP encountered")
-          break
-        } else throw new Error(err)
+        console.log("Encountered runtime error:", err.message)
+        if (err.message === ERRORS.STOP) success = true
+        break
       }
     }
 
-    const result = { stack: this._ms.stack.dump }
+    const result = { success, stack: this._ms.stack.dump }
 
     return result
   }

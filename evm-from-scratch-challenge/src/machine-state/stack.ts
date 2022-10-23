@@ -1,3 +1,4 @@
+import { MAX_256_BITS } from "../constants"
 import ERRORS from "../errors"
 
 // From the yellow paper:
@@ -23,6 +24,8 @@ export default class Stack {
   }
 
   push(value: bigint) {
+    if (value < 0n) throw new Error(ERRORS.STACK_VALUE_TOO_SMALL)
+    if (value > MAX_256_BITS) throw new Error(ERRORS.STACK_VALUE_TOO_BIG)
     if (this._stack.length === FULL_STACK) throw new Error(ERRORS.STACK_OVERFLOW)
 
     this._stack.push(value)
