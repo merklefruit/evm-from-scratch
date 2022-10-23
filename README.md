@@ -8,8 +8,7 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 
 - Spend 1 hour every day implementing or studying the EVM (and document the process)
 - The 100 days don't have to be strictly consecutive. It's on a best-effort basis.
-- Make a public commitment to the challenge (e.g. tweet, blog post, etc.)
-- Share my progress every day (e.g. tweet, blog post, etc.)
+- Document my progress every day
 
 ## Progress
 
@@ -18,3 +17,4 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 2](./day02.md): Setting up the EVM-from-scratch challenge & EVM class
 - [x] [Day 3](./day03.md): Reading the yellow paper & EVM inception (EVM inside EVM)
 - [x] [Day 4](./day04.md): Stack & memory implementation & first OPCODEs
+- [x] [Day 5](./day05.md): PUSH, POP, SUB opcodes, MachineState context struct
