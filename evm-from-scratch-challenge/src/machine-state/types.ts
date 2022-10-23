@@ -8,13 +8,15 @@ import type { ProgramCounter } from "../types"
 // the active number of words in memory (counting continuously from position 0),
 // and the stack contents. The memory contents μm are a series of zeroes of size 2^256.
 
-// The machine state is a tuple of:
+// The machine state is a tuple defined of:
 // - gas available
 // - program counter
 // - memory contents
 // - active number of words in memory
 // - stack contents
-// - code (bin)
+
+// I also added the full execution bytecode:
+// - code (bin): the full code of the current execution context
 export interface MachineState {
   gasAvailable: bigint
   pc: ProgramCounter

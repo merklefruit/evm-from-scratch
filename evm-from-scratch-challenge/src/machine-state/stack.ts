@@ -16,42 +16,32 @@ const EMPTY_STACK = 0
 const FULL_STACK = 1024
 
 export default class Stack {
-  private _stack: bigint[]
+  protected _stack: bigint[]
 
   constructor() {
     this._stack = []
   }
 
   push(value: bigint) {
-    // todo: add word size check
-
-    if (this._stack.length === FULL_STACK) {
-      throw new Error(ERRORS.STACK_OVERFLOW)
-    }
+    if (this._stack.length === FULL_STACK) throw new Error(ERRORS.STACK_OVERFLOW)
 
     this._stack.push(value)
   }
 
   pop(): bigint {
-    if (this._stack.length === EMPTY_STACK) {
-      throw new Error(ERRORS.STACK_UNDERFLOW)
-    }
+    if (this._stack.length === EMPTY_STACK) throw new Error(ERRORS.STACK_UNDERFLOW)
 
     return this._stack.pop()!
   }
 
   popN(n: number): bigint[] {
-    if (this._stack.length < n) {
-      throw new Error(ERRORS.STACK_UNDERFLOW)
-    }
+    if (this._stack.length < n) throw new Error(ERRORS.STACK_UNDERFLOW)
 
     return this._stack.splice(this._stack.length - n, n)
   }
 
   peek(): bigint {
-    if (this._stack.length === EMPTY_STACK) {
-      throw new Error(ERRORS.STACK_UNDERFLOW)
-    }
+    if (this._stack.length === EMPTY_STACK) throw new Error(ERRORS.STACK_UNDERFLOW)
 
     return this._stack[this._stack.length - 1]
   }
@@ -61,6 +51,6 @@ export default class Stack {
   }
 
   get dump(): bigint[] {
-    return this._stack
+    return this._stack.slice().reverse()
   }
 }
