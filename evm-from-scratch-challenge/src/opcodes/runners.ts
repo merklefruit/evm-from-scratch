@@ -139,10 +139,9 @@ function BYTE(ms: MachineState) {
   ms.stack.push(res)
 }
 
-// 0x50 - 0x5f
+// 0x50
 function POP(ms: MachineState) {
-  const size = ms.code[ms.pc] - 0x4f
-  ms.stack.popN(size)
+  ms.stack.pop()
 }
 
 // 0x60 - 0x7f
@@ -195,7 +194,8 @@ const runners: Runners = {
 
   0x1a: { name: "BYTE", runner: BYTE },
 
-  ...buildOpcodeRangeObjects(0x50, 0x5f, "POP", POP),
+  0x50: { name: "POP", runner: POP },
+
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),
   ...buildOpcodeRangeObjects(0x80, 0x8f, "DUP", DUP),
   ...buildOpcodeRangeObjects(0x90, 0x9f, "SWAP", SWAP),
