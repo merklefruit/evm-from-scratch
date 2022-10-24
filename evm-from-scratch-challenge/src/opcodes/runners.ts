@@ -3,7 +3,6 @@ import ERRORS from "../errors"
 
 import type { MachineState } from "../machine-state/types"
 import type { Runners } from "./types"
-import { MAX_256_BITS } from "../constants"
 
 // 0x00
 function STOP() {
@@ -61,6 +60,22 @@ function SMOD(ms: MachineState) {
   ms.stack.push(res)
 }
 
+// TODO: addmod, mulmod, exp, signextend
+
+// 0x10
+function LT(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = a < b ? 1n : 0n
+  ms.stack.push(res)
+}
+
+// 0x11
+function GT(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = a > b ? 1n : 0n
+  ms.stack.push(res)
+}
+
 // 0x50 - 0x5f
 function POP(ms: MachineState) {
   const size = ms.code[ms.pc] - 0x4f
@@ -90,6 +105,9 @@ const runners: Runners = {
   0x05: { name: "SDIV", runner: SDIV },
   0x06: { name: "MOD", runner: MOD },
   0x07: { name: "SMOD", runner: SMOD },
+
+  0x10: { name: "LT", runner: LT },
+  0x11: { name: "GT", runner: GT },
 
   ...buildOpcodeRangeObjects(0x50, 0x5f, "POP", POP),
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),
