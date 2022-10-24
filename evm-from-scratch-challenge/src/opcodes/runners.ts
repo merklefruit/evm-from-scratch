@@ -99,7 +99,7 @@ function EQ(ms: MachineState) {
 
 // 0x15
 function ISZERO(ms: MachineState) {
-  const [a] = ms.stack.popN(1)
+  const a = ms.stack.pop()
   const res = a === 0n ? 1n : 0n
   ms.stack.push(res)
 }
@@ -127,7 +127,7 @@ function XOR(ms: MachineState) {
 
 // 0x19
 function NOT(ms: MachineState) {
-  const [a] = ms.stack.popN(1)
+  const a = ms.stack.pop()
   const res = bigMath.mod256(~a)
   ms.stack.push(res)
 }
@@ -142,6 +142,32 @@ function BYTE(ms: MachineState) {
 // 0x50
 function POP(ms: MachineState) {
   ms.stack.pop()
+}
+
+// TODO: mload, mstore, mstore8, sload, sstore
+
+// 0x56
+function JUMP(ms: MachineState) {
+  const dest = ms.stack.pop()
+  if (dest > ms.code.length) throw new Error(ERRORS.JUMP_OUT_OF_BOUNDS)
+  if (ms.code[Number(dest)] !== 0x5b) throw new Error(ERRORS.JUMP_TO_INVALID_DESTINATION)
+  ms.pc = Number(dest)
+}
+
+// 0x57
+function JUMPI(ms: MachineState) {
+  const [dest, cond] = ms.stack.popN(2)
+  if (cond === 0n) return
+  if (dest > ms.code.length) throw new Error(ERRORS.JUMP_OUT_OF_BOUNDS)
+  if (ms.code[Number(dest)] !== 0x5b) throw new Error(ERRORS.JUMP_TO_INVALID_DESTINATION)
+  ms.pc = Number(dest)
+}
+
+// TODO: 0x58 ... 0x5a
+
+// 0x5b
+function JUMPDEST(ms: MachineState) {
+  // do nothing
 }
 
 // 0x60 - 0x7f
@@ -195,6 +221,11 @@ const runners: Runners = {
   0x1a: { name: "BYTE", runner: BYTE },
 
   0x50: { name: "POP", runner: POP },
+
+  0x56: { name: "JUMP", runner: JUMP },
+  0x57: { name: "JUMPI", runner: JUMPI },
+
+  0x5b: { name: "JUMPDEST", runner: JUMPDEST },
 
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),
   ...buildOpcodeRangeObjects(0x80, 0x8f, "DUP", DUP),
