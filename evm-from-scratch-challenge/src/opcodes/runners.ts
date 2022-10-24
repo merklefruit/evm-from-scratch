@@ -132,6 +132,13 @@ function NOT(ms: MachineState) {
   ms.stack.push(res)
 }
 
+// 0x1a
+function BYTE(ms: MachineState) {
+  const [pos, val] = ms.stack.popN(2)
+  const res = pos > 31n ? 0n : (val >> (8n * (31n - pos))) & 0xffn
+  ms.stack.push(res)
+}
+
 // 0x50 - 0x5f
 function POP(ms: MachineState) {
   const size = ms.code[ms.pc] - 0x4f
@@ -148,6 +155,19 @@ function PUSH(ms: MachineState) {
 
   ms.pc += size
   ms.stack.push(valueAsBigInt)
+}
+
+// 0x80 - 0x8f
+function DUP(ms: MachineState) {
+  const pos = ms.code[ms.pc] - 0x7f
+  const value = ms.stack.peek(pos)
+  ms.stack.push(value)
+}
+
+// 0x90 - 0x9f
+function SWAP(ms: MachineState) {
+  const pos = ms.code[ms.pc] - 0x8f
+  ms.stack.swap(pos)
 }
 
 // ******************************* RUNNERS OBJECT *******************************
@@ -173,8 +193,12 @@ const runners: Runners = {
   0x18: { name: "XOR", runner: XOR },
   0x19: { name: "NOT", runner: NOT },
 
+  0x1a: { name: "BYTE", runner: BYTE },
+
   ...buildOpcodeRangeObjects(0x50, 0x5f, "POP", POP),
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),
+  ...buildOpcodeRangeObjects(0x80, 0x8f, "DUP", DUP),
+  ...buildOpcodeRangeObjects(0x90, 0x9f, "SWAP", SWAP),
 }
 
 export default runners

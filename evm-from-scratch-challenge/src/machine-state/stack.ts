@@ -43,10 +43,19 @@ export default class Stack {
     return this._stack.splice(this._stack.length - n, n).reverse()
   }
 
-  peek(): bigint {
+  peek(n?: number): bigint {
     if (this._stack.length === EMPTY_STACK) throw new Error(ERRORS.STACK_UNDERFLOW)
 
-    return this._stack[this._stack.length - 1]
+    return this._stack[this._stack.length - (n || 1)]
+  }
+
+  swap(n: number) {
+    if (this._stack.length < n) throw new Error(ERRORS.STACK_UNDERFLOW)
+
+    const top = this._stack.pop()!
+    const bottom = this._stack[this._stack.length - n]
+    this._stack[this._stack.length - n] = top
+    this._stack.push(bottom)
   }
 
   get length(): number {
