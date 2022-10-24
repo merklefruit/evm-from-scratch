@@ -104,6 +104,34 @@ function ISZERO(ms: MachineState) {
   ms.stack.push(res)
 }
 
+// 0x16
+function AND(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = a & b
+  ms.stack.push(res)
+}
+
+// 0x17
+function OR(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = a | b
+  ms.stack.push(res)
+}
+
+// 0x18
+function XOR(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = a ^ b
+  ms.stack.push(res)
+}
+
+// 0x19
+function NOT(ms: MachineState) {
+  const [a] = ms.stack.popN(1)
+  const res = bigMath.mod256(~a)
+  ms.stack.push(res)
+}
+
 // 0x50 - 0x5f
 function POP(ms: MachineState) {
   const size = ms.code[ms.pc] - 0x4f
@@ -140,6 +168,10 @@ const runners: Runners = {
   0x13: { name: "SGT", runner: SGT },
   0x14: { name: "EQ", runner: EQ },
   0x15: { name: "ISZERO", runner: ISZERO },
+  0x16: { name: "AND", runner: AND },
+  0x17: { name: "OR", runner: OR },
+  0x18: { name: "XOR", runner: XOR },
+  0x19: { name: "NOT", runner: NOT },
 
   ...buildOpcodeRangeObjects(0x50, 0x5f, "POP", POP),
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),
