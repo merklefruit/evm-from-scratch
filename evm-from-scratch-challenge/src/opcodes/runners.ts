@@ -76,6 +76,34 @@ function GT(ms: MachineState) {
   ms.stack.push(res)
 }
 
+// 0x12
+function SLT(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = bigMath.toSigned256(a) < bigMath.toSigned256(b) ? 1n : 0n
+  ms.stack.push(res)
+}
+
+// 0x13
+function SGT(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = bigMath.toSigned256(a) > bigMath.toSigned256(b) ? 1n : 0n
+  ms.stack.push(res)
+}
+
+// 0x14
+function EQ(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = a === b ? 1n : 0n
+  ms.stack.push(res)
+}
+
+// 0x15
+function ISZERO(ms: MachineState) {
+  const [a] = ms.stack.popN(1)
+  const res = a === 0n ? 1n : 0n
+  ms.stack.push(res)
+}
+
 // 0x50 - 0x5f
 function POP(ms: MachineState) {
   const size = ms.code[ms.pc] - 0x4f
@@ -108,6 +136,10 @@ const runners: Runners = {
 
   0x10: { name: "LT", runner: LT },
   0x11: { name: "GT", runner: GT },
+  0x12: { name: "SLT", runner: SLT },
+  0x13: { name: "SGT", runner: SGT },
+  0x14: { name: "EQ", runner: EQ },
+  0x15: { name: "ISZERO", runner: ISZERO },
 
   ...buildOpcodeRangeObjects(0x50, 0x5f, "POP", POP),
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),
