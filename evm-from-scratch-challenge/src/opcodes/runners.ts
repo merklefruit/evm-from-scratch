@@ -53,6 +53,14 @@ function MOD(ms: MachineState) {
   ms.stack.push(res)
 }
 
+// 0x07
+function SMOD(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const mod = b === 0n ? 0n : bigMath.toSigned256(a) % bigMath.toSigned256(b)
+  const res = bigMath.toUnsigned256(mod)
+  ms.stack.push(res)
+}
+
 // 0x50 - 0x5f
 function POP(ms: MachineState) {
   const size = ms.code[ms.pc] - 0x4f
@@ -81,6 +89,7 @@ const runners: Runners = {
   0x04: { name: "DIV", runner: DIV },
   0x05: { name: "SDIV", runner: SDIV },
   0x06: { name: "MOD", runner: MOD },
+  0x07: { name: "SMOD", runner: SMOD },
 
   ...buildOpcodeRangeObjects(0x50, 0x5f, "POP", POP),
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),
