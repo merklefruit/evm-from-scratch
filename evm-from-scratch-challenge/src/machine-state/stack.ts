@@ -40,7 +40,7 @@ export default class Stack {
   popN(n: number): bigint[] {
     if (this._stack.length < n) throw new Error(ERRORS.STACK_UNDERFLOW)
 
-    return this._stack.splice(this._stack.length - n, n)
+    return this._stack.splice(this._stack.length - n, n).reverse()
   }
 
   peek(): bigint {

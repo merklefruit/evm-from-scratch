@@ -64,7 +64,7 @@ export default class EVM {
     console.log(`executing 0x${opcode.toString(16)}: ${runners[opcode]?.name}`)
 
     const runner = runners[opcode]?.runner
-    if (!runner) throw new Error(`Opcode ${opcode} not implemented`)
+    if (!runner) throw new Error(`Opcode 0x${opcode.toString(16)} not implemented`)
 
     // execute the opcode
     console.log("stack before", this._ms.stack.dump)

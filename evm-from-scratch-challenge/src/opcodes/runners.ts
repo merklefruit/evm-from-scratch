@@ -1,9 +1,9 @@
-import ERRORS from "../errors"
 import { bigMath, buildOpcodeRangeObjects, parseBytesIntoBigInt } from "./utils"
-import { MAX_256_BITS } from "../constants"
+import ERRORS from "../errors"
 
 import type { MachineState } from "../machine-state/types"
 import type { Runners } from "./types"
+import { MAX_256_BITS } from "../constants"
 
 // 0x00
 function STOP() {
@@ -13,20 +13,44 @@ function STOP() {
 // 0x01
 function ADD(ms: MachineState) {
   const [a, b] = ms.stack.popN(2)
-
-  ms.stack.push((a + b) % MAX_256_BITS)
+  const res = bigMath.mod256(a + b)
+  ms.stack.push(res)
 }
 
 // 0x02
 function MUL(ms: MachineState) {
   const [a, b] = ms.stack.popN(2)
-  ms.stack.push((a * b) % MAX_256_BITS)
+  const res = bigMath.mod256(a * b)
+  ms.stack.push(res)
 }
 
 // 0x03
 function SUB(ms: MachineState) {
   const [a, b] = ms.stack.popN(2)
-  ms.stack.push(b < a ? MAX_256_BITS + b - a : b - a)
+  const res = bigMath.mod256(a - b)
+  ms.stack.push(res)
+}
+
+// 0x04
+function DIV(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = b === 0n ? 0n : bigMath.mod256(a / b)
+  ms.stack.push(res)
+}
+
+// 0x05
+function SDIV(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const div = b === 0n ? 0n : bigMath.toSigned256(a) / bigMath.toSigned256(b)
+  const res = bigMath.toUnsigned256(div)
+  ms.stack.push(res)
+}
+
+// 0x06
+function MOD(ms: MachineState) {
+  const [a, b] = ms.stack.popN(2)
+  const res = b === 0n ? 0n : bigMath.mod256(a % b)
+  ms.stack.push(res)
 }
 
 // 0x50 - 0x5f
@@ -54,6 +78,9 @@ const runners: Runners = {
   0x01: { name: "ADD", runner: ADD },
   0x02: { name: "MUL", runner: MUL },
   0x03: { name: "SUB", runner: SUB },
+  0x04: { name: "DIV", runner: DIV },
+  0x05: { name: "SDIV", runner: SDIV },
+  0x06: { name: "MOD", runner: MOD },
 
   ...buildOpcodeRangeObjects(0x50, 0x5f, "POP", POP),
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),

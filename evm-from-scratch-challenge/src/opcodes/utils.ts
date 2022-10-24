@@ -1,4 +1,6 @@
-import { OpcodeRunner, Runners } from "./types"
+import { MAX_256_BITS } from "../constants"
+
+import type { OpcodeRunner, Runners } from "./types"
 
 export function buildOpcodeRangeObjects(
   start: number,
@@ -36,5 +38,15 @@ export const bigMath = {
   max(value: bigint, ...values: bigint[]): bigint {
     for (const v of values) if (v > value) value = v
     return value
+  },
+  toSigned256(x: bigint): bigint {
+    return BigInt.asIntN(256, x)
+  },
+  toUnsigned256(x: bigint): bigint {
+    return BigInt.asUintN(256, x)
+  },
+  mod256(x: bigint): bigint {
+    const mod = x % MAX_256_BITS
+    return mod < 0n ? mod + MAX_256_BITS : mod
   },
 }
