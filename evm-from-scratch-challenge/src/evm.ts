@@ -68,8 +68,10 @@ export default class EVM {
 
     // execute the opcode
     console.log("stack before", this._ms.stack.dump)
+    console.log("memory before", this._ms.memory.dump)
     await runner(this._ms)
     console.log("stack after", this._ms.stack.dump)
+    console.log("memory after", this._ms.memory.dump)
 
     this._ms.pc++
   }

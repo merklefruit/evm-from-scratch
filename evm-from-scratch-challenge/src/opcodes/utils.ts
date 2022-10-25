@@ -19,6 +19,11 @@ export function parseBytesIntoBigInt(bytes: Uint8Array): bigint {
   return BigInt("0x" + array.join(""))
 }
 
+export function parseBigIntIntoBytes(bigint: bigint, length: number): Buffer {
+  const hex = bigint.toString(16).padStart(2 * length, "0")
+  return Buffer.from(hex, "hex")
+}
+
 // https://stackoverflow.com/questions/51867270
 export const bigMath = {
   abs(x: bigint): bigint {
@@ -48,5 +53,9 @@ export const bigMath = {
   mod256(x: bigint): bigint {
     const mod = x % MAX_256_BITS
     return mod < 0n ? mod + MAX_256_BITS : mod
+  },
+  ceil(x: bigint, ceil: bigint): bigint {
+    const mod = x % ceil
+    return mod === 0n ? x : x + ceil - mod
   },
 }

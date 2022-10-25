@@ -1,4 +1,9 @@
-import { bigMath, buildOpcodeRangeObjects, parseBytesIntoBigInt } from "./utils"
+import {
+  bigMath,
+  buildOpcodeRangeObjects,
+  parseBigIntIntoBytes,
+  parseBytesIntoBigInt,
+} from "./utils"
 import ERRORS from "../errors"
 
 import type { MachineState } from "../machine-state/types"
@@ -144,7 +149,28 @@ function POP(ms: MachineState) {
   ms.stack.pop()
 }
 
-// TODO: mload, mstore, mstore8, sload, sstore
+// 0x51
+function MLOAD(ms: MachineState) {
+  const offset = Number(ms.stack.pop())
+  const val = parseBytesIntoBigInt(ms.memory.read(offset))
+  ms.stack.push(val)
+}
+
+// 0x52
+function MSTORE(ms: MachineState) {
+  const [offset, val] = ms.stack.popN(2)
+  const word = parseBigIntIntoBytes(val, 32)
+  ms.memory.write(Number(offset), word, 32)
+}
+
+// 0x53
+function MSTORE8(ms: MachineState) {
+  const [offset, val] = ms.stack.popN(2)
+  const byte = parseBigIntIntoBytes(val, 1)
+  ms.memory.write(Number(offset), byte, 1)
+}
+
+// todo: sload, sstore
 
 // 0x56
 function JUMP(ms: MachineState) {
@@ -163,7 +189,17 @@ function JUMPI(ms: MachineState) {
   ms.pc = Number(dest)
 }
 
-// TODO: 0x58 ... 0x5a
+// 0x58
+function PC(ms: MachineState) {
+  ms.stack.push(BigInt(ms.pc))
+}
+
+// 0x59
+function MSIZE(ms: MachineState) {
+  ms.stack.push(BigInt(ms.memory.size))
+}
+
+// TODO: 0x5a ... 0x5a
 
 // 0x5b
 function JUMPDEST(ms: MachineState) {
@@ -221,9 +257,14 @@ const runners: Runners = {
   0x1a: { name: "BYTE", runner: BYTE },
 
   0x50: { name: "POP", runner: POP },
+  0x51: { name: "MLOAD", runner: MLOAD },
+  0x52: { name: "MSTORE", runner: MSTORE },
+  0x53: { name: "MSTORE8", runner: MSTORE8 },
 
   0x56: { name: "JUMP", runner: JUMP },
   0x57: { name: "JUMPI", runner: JUMPI },
+  0x58: { name: "PC", runner: PC },
+  0x59: { name: "MSIZE", runner: MSIZE },
 
   0x5b: { name: "JUMPDEST", runner: JUMPDEST },
 

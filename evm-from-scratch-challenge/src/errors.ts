@@ -7,6 +7,8 @@ enum ERRORS {
   PC_OUT_OF_BOUNDS = "pc out of bounds",
   JUMP_OUT_OF_BOUNDS = "jump out of bounds",
   JUMP_TO_INVALID_DESTINATION = "jump to invalid destination",
+  INVALID_MEMORY_OFFSET = "invalid memory offset",
+  INVALID_MEMORY_VALUE_SIZE = "invalid memory value size",
 
   STOP = "STOP",
   REVERT = "REVERT",
