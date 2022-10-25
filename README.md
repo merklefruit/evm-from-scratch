@@ -18,3 +18,5 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 3](./day03.md): Reading the yellow paper & EVM inception (EVM inside EVM)
 - [x] [Day 4](./day04.md): Stack & memory implementation & first OPCODEs
 - [x] [Day 5](./day05.md): PUSH, POP, SUB opcodes, MachineState context struct
+- [x] [Day 6](./day06.md): Most Arithmetic, Comparison, Bitwise operations & JUMP opcodes
+- [x] [Day 7](./day07.md): Memory structure & related OPCODEs
