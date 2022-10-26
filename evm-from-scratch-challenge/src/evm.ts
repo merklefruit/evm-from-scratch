@@ -1,11 +1,14 @@
-import Memory from "./machine-state/memory"
-import Stack from "./machine-state/stack"
-import Storage from "./machine-state/storage"
 import runners from "./opcodes/runners"
 import ERRORS from "./errors"
 
+import GlobalState from "./globalState"
+
+import Stack from "./machine-state/stack"
+import Memory from "./machine-state/memory"
+import Storage from "./machine-state/storage"
+
+import type { Address, State, TxData } from "./types"
 import type { MachineState } from "./machine-state/types"
-import type { TxData } from "./types"
 
 // Main EVM class. Brainstorming notes:
 // For each transaction, the EVM can take as input:
@@ -19,13 +22,20 @@ import type { TxData } from "./types"
 // and return the updated world state and the transaction output data.
 
 export default class EVM {
-  private _ms: MachineState
-  private _storage: Storage
+  private _origin: Address
+  private _gasPrice: bigint
+  private _gasLimit: bigint
 
-  constructor(_code: Uint8Array, _txData: TxData) {
-    this._storage = new Storage()
+  private _ms: MachineState
+
+  constructor(_code: Uint8Array, _txData: TxData, _globalState: State) {
+    this._origin = _txData?.origin
+    this._gasPrice = 0n
+    this._gasLimit = 0n
 
     this._ms = {
+      globalState: new GlobalState(_globalState),
+      storage: new Storage(),
       gasAvailable: 0n, // todo
       memory: new Memory(),
       stack: new Stack(),

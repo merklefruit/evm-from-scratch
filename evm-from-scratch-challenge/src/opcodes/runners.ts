@@ -2,6 +2,7 @@ import {
   bigMath,
   buildOpcodeRangeObjects,
   parseBigIntIntoBytes,
+  parseBigintIntoHexString,
   parseBytesIntoBigInt,
   parseHexStringIntoBigInt,
 } from "./utils"
@@ -159,16 +160,24 @@ function SHA3(ms: MachineState) {
 
 // 0x30
 function ADDRESS(ms: MachineState) {
-  const res = parseHexStringIntoBigInt(ms.txData.to)
+  const res = ms.txData.to
+  ms.stack.push(parseHexStringIntoBigInt(res))
+}
+
+// 0x31
+function BALANCE(ms: MachineState) {
+  const address = ms.stack.pop()
+  const addressHex = parseBigintIntoHexString(address)
+  const res = ms.globalState.getBalance(addressHex)
   ms.stack.push(res)
 }
 
-// todo: 31, 32
+// todo: 32
 
 // 0x33
 function CALLER(ms: MachineState) {
-  const res = parseHexStringIntoBigInt(ms.txData.from)
-  ms.stack.push(res)
+  const res = ms.txData.from
+  ms.stack.push(parseHexStringIntoBigInt(res))
 }
 
 // 0x50
@@ -286,6 +295,7 @@ const runners: Runners = {
   0x20: { name: "SHA3", runner: SHA3 },
 
   0x30: { name: "ADDRESS", runner: ADDRESS },
+  0x31: { name: "BALANCE", runner: BALANCE },
 
   0x33: { name: "CALLER", runner: CALLER },
 

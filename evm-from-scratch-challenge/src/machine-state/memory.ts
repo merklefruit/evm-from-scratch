@@ -41,6 +41,10 @@ export default class Memory {
     return this._memory.length
   }
 
+  get activeWordsCount(): number {
+    return this.size / 32
+  }
+
   get dump(): string {
     let dump = ""
     for (let i = 0; i < this._memory.length; i += 32) {

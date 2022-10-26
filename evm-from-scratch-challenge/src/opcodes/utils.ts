@@ -29,6 +29,10 @@ export function parseHexStringIntoBigInt(hex: string): bigint {
   return BigInt(hex)
 }
 
+export function parseBigintIntoHexString(bigint: bigint): string {
+  return "0x" + bigint.toString(16)
+}
+
 // https://stackoverflow.com/questions/51867270
 export const bigMath = {
   abs(x: bigint): bigint {
