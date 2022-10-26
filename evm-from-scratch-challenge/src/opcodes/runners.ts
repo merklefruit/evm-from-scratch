@@ -192,6 +192,18 @@ function COINBASE(ms: MachineState) {
   ms.stack.push(parseHexStringIntoBigInt(res))
 }
 
+// 0x42
+function TIMESTAMP(ms: MachineState) {
+  const res = ms.block.timestamp
+  ms.stack.push(res)
+}
+
+// 0x43
+function NUMBER(ms: MachineState) {
+  const res = ms.block.number
+  ms.stack.push(BigInt(res))
+}
+
 // 0x50
 function POP(ms: MachineState) {
   ms.stack.pop()
@@ -313,6 +325,8 @@ const runners: Runners = {
   0x33: { name: "CALLER", runner: CALLER },
 
   0x41: { name: "COINBASE", runner: COINBASE },
+  0x42: { name: "TIMESTAMP", runner: TIMESTAMP },
+  0x43: { name: "NUMBER", runner: NUMBER },
 
   0x50: { name: "POP", runner: POP },
   0x51: { name: "MLOAD", runner: MLOAD },
