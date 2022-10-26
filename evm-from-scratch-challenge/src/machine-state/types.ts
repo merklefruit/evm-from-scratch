@@ -21,7 +21,6 @@ export interface MachineState {
   gasAvailable: bigint
   pc: ProgramCounter
   memory: Memory
-  activeWordsInMemory: bigint
   stack: Stack
   code: Uint8Array
 }

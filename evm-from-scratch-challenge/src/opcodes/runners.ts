@@ -4,6 +4,7 @@ import {
   parseBigIntIntoBytes,
   parseBytesIntoBigInt,
 } from "./utils"
+import { keccak256 } from "ethereum-cryptography/keccak"
 import ERRORS from "../errors"
 
 import type { MachineState } from "../machine-state/types"
@@ -144,6 +145,17 @@ function BYTE(ms: MachineState) {
   ms.stack.push(res)
 }
 
+// todo: 1b, 1c, 1d
+
+// 0x20
+function SHA3(ms: MachineState) {
+  const [offset, size] = ms.stack.popN(2)
+  const data = ms.memory.read(Number(offset)).subarray(0, Number(size))
+  const hash = keccak256(data)
+  const res = parseBytesIntoBigInt(hash)
+  ms.stack.push(res)
+}
+
 // 0x50
 function POP(ms: MachineState) {
   ms.stack.pop()
@@ -255,6 +267,8 @@ const runners: Runners = {
   0x19: { name: "NOT", runner: NOT },
 
   0x1a: { name: "BYTE", runner: BYTE },
+
+  0x20: { name: "SHA3", runner: SHA3 },
 
   0x50: { name: "POP", runner: POP },
   0x51: { name: "MLOAD", runner: MLOAD },
