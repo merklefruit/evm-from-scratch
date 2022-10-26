@@ -165,6 +165,12 @@ function ADDRESS(ms: MachineState) {
 
 // todo: 31, 32
 
+// 0x33
+function CALLER(ms: MachineState) {
+  const res = parseHexStringIntoBigInt(ms.txData.from)
+  ms.stack.push(res)
+}
+
 // 0x50
 function POP(ms: MachineState) {
   ms.stack.pop()
@@ -280,6 +286,8 @@ const runners: Runners = {
   0x20: { name: "SHA3", runner: SHA3 },
 
   0x30: { name: "ADDRESS", runner: ADDRESS },
+
+  0x33: { name: "CALLER", runner: CALLER },
 
   0x50: { name: "POP", runner: POP },
   0x51: { name: "MLOAD", runner: MLOAD },
