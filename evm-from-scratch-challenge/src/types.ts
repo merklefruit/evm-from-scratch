@@ -39,4 +39,5 @@ export interface Block {
   number: number
   timestamp: bigint
   coinbase: Address
+  difficulty: bigint
 }

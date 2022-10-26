@@ -32,5 +32,6 @@ export function buildBlock(t: Test): Block {
     number: Number(t.block?.number || 0),
     timestamp: BigInt(t.block?.timestamp || 0n),
     coinbase: t.block?.coinbase || ZERO_ADDRESS,
+    difficulty: BigInt(t.block?.difficulty || 0n),
   }
 }

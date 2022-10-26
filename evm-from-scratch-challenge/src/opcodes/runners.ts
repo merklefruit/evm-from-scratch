@@ -204,6 +204,12 @@ function NUMBER(ms: MachineState) {
   ms.stack.push(BigInt(res))
 }
 
+// 0x44
+function DIFFICULTY(ms: MachineState) {
+  const res = ms.block.difficulty
+  ms.stack.push(BigInt(res))
+}
+
 // 0x50
 function POP(ms: MachineState) {
   ms.stack.pop()
@@ -327,6 +333,7 @@ const runners: Runners = {
   0x41: { name: "COINBASE", runner: COINBASE },
   0x42: { name: "TIMESTAMP", runner: TIMESTAMP },
   0x43: { name: "NUMBER", runner: NUMBER },
+  0x44: { name: "DIFFICULTY", runner: DIFFICULTY },
 
   0x50: { name: "POP", runner: POP },
   0x51: { name: "MLOAD", runner: MLOAD },
