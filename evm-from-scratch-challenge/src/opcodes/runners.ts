@@ -184,6 +184,14 @@ function CALLER(ms: MachineState) {
   ms.stack.push(parseHexStringIntoBigInt(res))
 }
 
+// todo: 0x34 .. 0x40
+
+// 0x41
+function COINBASE(ms: MachineState) {
+  const res = ms.block.coinbase
+  ms.stack.push(parseHexStringIntoBigInt(res))
+}
+
 // 0x50
 function POP(ms: MachineState) {
   ms.stack.pop()
@@ -303,6 +311,8 @@ const runners: Runners = {
   0x32: { name: "ORIGIN", runner: ORIGIN },
 
   0x33: { name: "CALLER", runner: CALLER },
+
+  0x41: { name: "COINBASE", runner: COINBASE },
 
   0x50: { name: "POP", runner: POP },
   0x51: { name: "MLOAD", runner: MLOAD },

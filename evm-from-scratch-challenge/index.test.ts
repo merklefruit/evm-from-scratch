@@ -2,7 +2,7 @@ import { expect, test } from "@jest/globals"
 
 import evm from "."
 import tests from "./evm.json"
-import { buildState, buildTxData, hexStringToUint8Array } from "./src/utils"
+import { buildBlock, buildState, buildTxData, hexStringToUint8Array } from "./src/utils"
 
 import type { Test } from "./src/types"
 
@@ -15,8 +15,9 @@ for (const t of tests as Test[]) {
     const code = hexStringToUint8Array(t.code.bin)
     const txData = buildTxData(t)
     const state = buildState(t)
+    const block = buildBlock(t)
 
-    const result = await evm(code, txData, state)
+    const result = await evm(code, txData, state, block)
 
     // Always check stack result
     expect(result.stack).toEqual(t.expect.stack.map((item) => BigInt(item)))

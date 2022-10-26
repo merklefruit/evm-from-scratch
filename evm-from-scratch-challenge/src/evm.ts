@@ -7,7 +7,7 @@ import Stack from "./machine-state/stack"
 import Memory from "./machine-state/memory"
 import Storage from "./machine-state/storage"
 
-import type { Address, State, TxData } from "./types"
+import type { Address, Block, State, TxData } from "./types"
 import type { MachineState } from "./machine-state/types"
 
 // Main EVM class. Brainstorming notes:
@@ -28,7 +28,7 @@ export default class EVM {
 
   private _ms: MachineState
 
-  constructor(_code: Uint8Array, _txData: TxData, _globalState: State) {
+  constructor(_code: Uint8Array, _txData: TxData, _globalState: State, _block: Block) {
     this._origin = _txData?.origin
     this._gasPrice = 0n
     this._gasLimit = 0n
@@ -39,6 +39,7 @@ export default class EVM {
       gasAvailable: 0n, // todo
       memory: new Memory(),
       stack: new Stack(),
+      block: _block,
       txData: _txData,
       code: _code,
       pc: 0,

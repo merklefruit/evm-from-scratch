@@ -1,9 +1,14 @@
 import EVM from "./src/evm"
 
-import type { TxData, State } from "./src/types"
+import type { TxData, State, Block } from "./src/types"
 
-export default async function evm(code: Uint8Array, txData: TxData, state: State) {
-  const evm = new EVM(code, txData, state)
+export default async function evm(
+  code: Uint8Array,
+  txData: TxData,
+  state: State,
+  block: Block
+) {
+  const evm = new EVM(code, txData, state, block)
 
   const result = await evm.run()
 

@@ -12,6 +12,7 @@ export interface Test {
   name: string
   code: Code
   tx?: Partial<TxData>
+  block?: Partial<Block>
   state?: State
   expect: {
     success?: boolean
@@ -32,4 +33,10 @@ export interface State {
 
 export interface Account {
   balance?: Value
+}
+
+export interface Block {
+  number: number
+  timestamp: bigint
+  coinbase: Address
 }

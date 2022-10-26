@@ -2,7 +2,7 @@ import type Stack from "./stack"
 import type Memory from "./memory"
 import type Storage from "./storage"
 import type GlobalState from "../globalState"
-import type { Gas, ProgramCounter, TxData } from "../types"
+import type { Block, Gas, ProgramCounter, TxData } from "../types"
 
 // From the yellow paper:
 // Machine State: The machine state μ is defined as the tuple (g, pc, m, i, s)
@@ -25,6 +25,7 @@ import type { Gas, ProgramCounter, TxData } from "../types"
 // - txData: the transaction data of the current execution context
 // - storage: the transient account state map of the current execution context
 // - globalState: the global state of the current execution context
+// - block: the block data of the current execution context
 
 export interface MachineState {
   gasAvailable: Gas
@@ -36,4 +37,5 @@ export interface MachineState {
   txData: TxData
   storage: Storage
   globalState: GlobalState
+  block: Block
 }
