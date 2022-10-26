@@ -172,7 +172,11 @@ function BALANCE(ms: MachineState) {
   ms.stack.push(res)
 }
 
-// todo: 32
+// 0x32
+function ORIGIN(ms: MachineState) {
+  const res = ms.txData.origin
+  ms.stack.push(parseHexStringIntoBigInt(res))
+}
 
 // 0x33
 function CALLER(ms: MachineState) {
@@ -296,6 +300,7 @@ const runners: Runners = {
 
   0x30: { name: "ADDRESS", runner: ADDRESS },
   0x31: { name: "BALANCE", runner: BALANCE },
+  0x32: { name: "ORIGIN", runner: ORIGIN },
 
   0x33: { name: "CALLER", runner: CALLER },
 
