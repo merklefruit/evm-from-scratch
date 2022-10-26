@@ -5,6 +5,7 @@ import runners from "./opcodes/runners"
 import ERRORS from "./errors"
 
 import type { MachineState } from "./machine-state/types"
+import type { TxData } from "./types"
 
 // Main EVM class. Brainstorming notes:
 // For each transaction, the EVM can take as input:
@@ -21,14 +22,14 @@ export default class EVM {
   private _ms: MachineState
   private _storage: Storage
 
-  constructor(_code: Uint8Array) {
+  constructor(_code: Uint8Array, _txData: TxData) {
     this._storage = new Storage()
 
     this._ms = {
       gasAvailable: 0n, // todo
-      activeWordsInMemory: 0n, // todo
       memory: new Memory(),
       stack: new Stack(),
+      txData: _txData,
       code: _code,
       pc: 0,
     }
@@ -37,11 +38,9 @@ export default class EVM {
   public async run() {
     let success = false
 
-    // execute opcodes sequentially
     console.log("starting execution")
-    console.log("code", this._ms.code)
-    console.log("pc", this._ms.pc)
 
+    // execute opcodes sequentially
     while (this._ms.pc < this._ms.code.length) {
       const opcode = this.currentOpcode
 

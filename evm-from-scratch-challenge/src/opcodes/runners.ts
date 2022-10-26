@@ -3,6 +3,7 @@ import {
   buildOpcodeRangeObjects,
   parseBigIntIntoBytes,
   parseBytesIntoBigInt,
+  parseHexStringIntoBigInt,
 } from "./utils"
 import { keccak256 } from "ethereum-cryptography/keccak"
 import ERRORS from "../errors"
@@ -156,6 +157,14 @@ function SHA3(ms: MachineState) {
   ms.stack.push(res)
 }
 
+// 0x30
+function ADDRESS(ms: MachineState) {
+  const res = parseHexStringIntoBigInt(ms.txData.to)
+  ms.stack.push(res)
+}
+
+// todo: 31, 32
+
 // 0x50
 function POP(ms: MachineState) {
   ms.stack.pop()
@@ -269,6 +278,8 @@ const runners: Runners = {
   0x1a: { name: "BYTE", runner: BYTE },
 
   0x20: { name: "SHA3", runner: SHA3 },
+
+  0x30: { name: "ADDRESS", runner: ADDRESS },
 
   0x50: { name: "POP", runner: POP },
   0x51: { name: "MLOAD", runner: MLOAD },

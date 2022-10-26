@@ -1,9 +1,11 @@
 import EVM from "./src/evm"
 
-export default async function evm(code: Uint8Array) {
-  const evm = new EVM(code)
+import type { TxData } from "./src/types"
+
+export default async function evm(code: Uint8Array, txData: TxData) {
+  const evm = new EVM(code, txData)
 
   const result = await evm.run()
 
-  return { stack: result.stack }
+  return result
 }

@@ -24,6 +24,11 @@ export function parseBigIntIntoBytes(bigint: bigint, length: number): Buffer {
   return Buffer.from(hex, "hex")
 }
 
+export function parseHexStringIntoBigInt(hex: string): bigint {
+  if (!hex.startsWith("0x")) hex = hex.padStart(2 * hex.length + 2, "0x")
+  return BigInt(hex)
+}
+
 // https://stackoverflow.com/questions/51867270
 export const bigMath = {
   abs(x: bigint): bigint {

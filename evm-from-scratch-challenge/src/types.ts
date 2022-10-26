@@ -7,13 +7,15 @@ export interface Code {
 
 export interface Test {
   name: string
-  state?: {
-    [key: string]: {
-      code: Code
-    }
-  }
   code: Code
+  tx?: Partial<TxData>
   expect: {
+    success?: boolean
     stack: string[]
   }
+}
+
+export interface TxData {
+  to: string
+  from: string
 }

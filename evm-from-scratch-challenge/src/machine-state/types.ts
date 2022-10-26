@@ -1,6 +1,6 @@
 import type Memory from "./memory"
 import type Stack from "./stack"
-import type { ProgramCounter } from "../types"
+import type { ProgramCounter, TxData } from "../types"
 
 // From the yellow paper:
 // Machine State: The machine state μ is defined as the tuple (g, pc, m, i, s)
@@ -17,10 +17,12 @@ import type { ProgramCounter } from "../types"
 
 // I also added the full execution bytecode:
 // - code (bin): the full code of the current execution context
+// - tx (TxData): the transaction data of the current execution context
 export interface MachineState {
   gasAvailable: bigint
   pc: ProgramCounter
   memory: Memory
   stack: Stack
   code: Uint8Array
+  txData: TxData
 }
