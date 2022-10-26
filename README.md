@@ -6,9 +6,13 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 
 ## Rules (very simple)
 
-- Spend 1 hour every day implementing or studying the EVM (and document the process)
+- Spend 1 hour every day implementing or studying the EVM
 - The 100 days don't have to be strictly consecutive. It's on a best-effort basis.
-- Document my progress every day
+- Document the progress daily
+
+## Roadmap
+
+- First goal: Implement a minimal EVM in Typescript that must pass all tests of the [evm-from-scratch](https://github.com/w1nt3r-eth/evm-from-scratch) challenge.
 
 ## Progress
 
@@ -20,3 +24,4 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 5](./day05.md): PUSH, POP, SUB opcodes, MachineState context struct
 - [x] [Day 6](./day06.md): Most Arithmetic, Comparison, Bitwise operations & JUMP opcodes
 - [x] [Day 7](./day07.md): Memory structure & related OPCODEs
+- [x] [Day 8](./day08.md): TxData, globalState, Block data & related OPCODEs
