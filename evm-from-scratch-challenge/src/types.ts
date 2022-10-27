@@ -25,6 +25,7 @@ export interface TxData {
   from: Address
   value: Value
   origin: Address
+  gasprice: Gas
 }
 
 export interface State {
@@ -40,4 +41,6 @@ export interface Block {
   timestamp: bigint
   coinbase: Address
   difficulty: bigint
+  gaslimit: string
+  chainid: number
 }

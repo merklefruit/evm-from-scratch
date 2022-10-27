@@ -12,6 +12,7 @@ export function buildTxData(t: Test): TxData {
     from: t.tx?.from ?? ZERO_ADDRESS,
     value: BigInt(t.tx?.value ?? 0),
     origin: t.tx?.origin ?? t.tx?.from ?? ZERO_ADDRESS,
+    gasprice: BigInt(t.tx?.gasprice ?? 0),
   }
 }
 
@@ -33,5 +34,7 @@ export function buildBlock(t: Test): Block {
     timestamp: BigInt(t.block?.timestamp || 0n),
     coinbase: t.block?.coinbase || ZERO_ADDRESS,
     difficulty: BigInt(t.block?.difficulty || 0n),
+    gaslimit: t.block?.gaslimit || "0x0",
+    chainid: Number(t.block?.chainid || 0),
   }
 }

@@ -36,11 +36,11 @@ export default class EVM {
     this._ms = {
       globalState: new GlobalState(_globalState),
       storage: new Storage(),
-      gasAvailable: 0n, // todo
       memory: new Memory(),
       stack: new Stack(),
-      block: _block,
+      gasAvailable: 0n, // todo
       txData: _txData,
+      block: _block,
       code: _code,
       pc: 0,
     }

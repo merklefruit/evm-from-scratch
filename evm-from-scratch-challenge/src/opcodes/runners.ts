@@ -1,3 +1,5 @@
+import { keccak256 } from "ethereum-cryptography/keccak"
+import ERRORS from "../errors"
 import {
   bigMath,
   buildOpcodeRangeObjects,
@@ -6,8 +8,6 @@ import {
   parseBytesIntoBigInt,
   parseHexStringIntoBigInt,
 } from "./utils"
-import { keccak256 } from "ethereum-cryptography/keccak"
-import ERRORS from "../errors"
 
 import type { MachineState } from "../machine-state/types"
 import type { Runners } from "./types"
@@ -184,7 +184,15 @@ function CALLER(ms: MachineState) {
   ms.stack.push(parseHexStringIntoBigInt(res))
 }
 
-// todo: 0x34 .. 0x40
+// todo: 0x34 .. 0x39
+
+// 0x3a
+function GASPRICE(ms: MachineState) {
+  const res = ms.txData.gasprice
+  ms.stack.push(res)
+}
+
+// todo: 0x3b .. 0x40
 
 // 0x41
 function COINBASE(ms: MachineState) {
@@ -207,6 +215,19 @@ function NUMBER(ms: MachineState) {
 // 0x44
 function DIFFICULTY(ms: MachineState) {
   const res = ms.block.difficulty
+  ms.stack.push(BigInt(res))
+}
+
+// 0x45
+function GASLIMIT(ms: MachineState) {
+  const res = ms.block.gaslimit
+  console.log(res)
+  ms.stack.push(parseHexStringIntoBigInt(res))
+}
+
+// 0x46
+function CHAINID(ms: MachineState) {
+  const res = ms.block.chainid
   ms.stack.push(BigInt(res))
 }
 
@@ -330,10 +351,14 @@ const runners: Runners = {
 
   0x33: { name: "CALLER", runner: CALLER },
 
+  0x3a: { name: "GASPRICE", runner: GASPRICE },
+
   0x41: { name: "COINBASE", runner: COINBASE },
   0x42: { name: "TIMESTAMP", runner: TIMESTAMP },
   0x43: { name: "NUMBER", runner: NUMBER },
   0x44: { name: "DIFFICULTY", runner: DIFFICULTY },
+  0x45: { name: "GASLIMIT", runner: GASLIMIT },
+  0x46: { name: "CHAINID", runner: CHAINID },
 
   0x50: { name: "POP", runner: POP },
   0x51: { name: "MLOAD", runner: MLOAD },
