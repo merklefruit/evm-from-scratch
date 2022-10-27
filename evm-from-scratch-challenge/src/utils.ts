@@ -13,6 +13,7 @@ export function buildTxData(t: Test): TxData {
     value: BigInt(t.tx?.value ?? 0),
     origin: t.tx?.origin ?? t.tx?.from ?? ZERO_ADDRESS,
     gasprice: BigInt(t.tx?.gasprice ?? 0),
+    data: Buffer.from(t.tx?.data ?? "", "hex"),
   }
 }
 

@@ -184,7 +184,25 @@ function CALLER(ms: MachineState) {
   ms.stack.push(parseHexStringIntoBigInt(res))
 }
 
-// todo: 0x34 .. 0x39
+// 0x34
+function CALLVALUE(ms: MachineState) {
+  const res = ms.txData.value
+  ms.stack.push(res)
+}
+
+// 0x35
+function CALLDATALOAD(ms: MachineState) {
+  const offset = Number(ms.stack.pop())
+  const calldataWord = ms.txData.data.subarray(offset, offset + 32)
+
+  const calldataWordPadded = Buffer.alloc(32)
+  calldataWord.copy(calldataWordPadded, 0, 0)
+
+  const res = parseBytesIntoBigInt(calldataWordPadded)
+  ms.stack.push(res)
+}
+
+// todo: 0x36 .. 0x39
 
 // 0x3a
 function GASPRICE(ms: MachineState) {
@@ -350,6 +368,8 @@ const runners: Runners = {
   0x32: { name: "ORIGIN", runner: ORIGIN },
 
   0x33: { name: "CALLER", runner: CALLER },
+  0x34: { name: "CALLVALUE", runner: CALLVALUE },
+  0x35: { name: "CALLDATALOAD", runner: CALLDATALOAD },
 
   0x3a: { name: "GASPRICE", runner: GASPRICE },
 
