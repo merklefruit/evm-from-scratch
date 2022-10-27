@@ -25,3 +25,4 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 6](./day06.md): Most Arithmetic, Comparison, Bitwise operations & JUMP opcodes
 - [x] [Day 7](./day07.md): Memory structure & related OPCODEs
 - [x] [Day 8](./day08.md): TxData, globalState, Block data & related OPCODEs
+- [x] [Day 9](./day09.md): More Environmental Opcodes & CALLDATALOAD. "Officially" started the challenge!
