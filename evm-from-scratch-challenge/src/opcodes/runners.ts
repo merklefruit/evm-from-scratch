@@ -224,6 +224,21 @@ function CODESIZE(ms: MachineState) {
   ms.stack.push(BigInt(res))
 }
 
+// 0x39
+function CODECOPY(ms: MachineState) {
+  const memOffset = Number(ms.stack.pop())
+  const codeOffset = Number(ms.stack.pop())
+  const size = Number(ms.stack.pop())
+
+  const codeBytesPortion = ms.code.subarray(codeOffset, codeOffset + size)
+  const codeBuffer = Buffer.from(codeBytesPortion)
+
+  const code = Buffer.alloc(size)
+  code.copy(codeBuffer, 0, 0)
+
+  ms.memory.write(memOffset, code, size)
+}
+
 // 0x3a
 function GASPRICE(ms: MachineState) {
   const res = ms.txData.gasprice
@@ -393,6 +408,7 @@ const runners: Runners = {
   0x36: { name: "CALLDATASIZE", runner: CALLDATASIZE },
   0x37: { name: "CALLDATACOPY", runner: CALLDATACOPY },
   0x38: { name: "CODESIZE", runner: CODESIZE },
+  0x39: { name: "CODECOPY", runner: CODECOPY },
 
   0x3a: { name: "GASPRICE", runner: GASPRICE },
 
