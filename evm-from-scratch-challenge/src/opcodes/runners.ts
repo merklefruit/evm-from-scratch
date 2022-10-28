@@ -234,7 +234,7 @@ function CODECOPY(ms: MachineState) {
   const codeBuffer = Buffer.from(codeBytesPortion)
 
   const code = Buffer.alloc(size)
-  code.copy(codeBuffer, 0, 0)
+  codeBuffer.copy(code, 0, 0)
 
   ms.memory.write(memOffset, code, size)
 }
