@@ -14,7 +14,7 @@ export default class Memory {
     this._memory = Buffer.alloc(0)
   }
 
-  write(offset: number, value: Buffer, size: 1 | 32) {
+  write(offset: number, value: Buffer, size: 1 | 32 | number) {
     if (offset < 0) throw new Error(ERRORS.INVALID_MEMORY_OFFSET)
     if (value.length !== size) throw new Error(ERRORS.INVALID_MEMORY_VALUE_SIZE)
 

@@ -202,7 +202,27 @@ function CALLDATALOAD(ms: MachineState) {
   ms.stack.push(res)
 }
 
-// todo: 0x36 .. 0x39
+// 0x36
+function CALLDATASIZE(ms: MachineState) {
+  const res = ms.txData.data.length
+  ms.stack.push(BigInt(res))
+}
+
+// 0x37
+function CALLDATACOPY(ms: MachineState) {
+  const memOffset = Number(ms.stack.pop())
+  const dataOffset = Number(ms.stack.pop())
+  const size = Number(ms.stack.pop())
+
+  const data = ms.txData.data.subarray(dataOffset, dataOffset + size)
+  ms.memory.write(memOffset, data, size)
+}
+
+// 0x38
+function CODESIZE(ms: MachineState) {
+  const res = ms.code.length
+  ms.stack.push(BigInt(res))
+}
 
 // 0x3a
 function GASPRICE(ms: MachineState) {
@@ -370,6 +390,9 @@ const runners: Runners = {
   0x33: { name: "CALLER", runner: CALLER },
   0x34: { name: "CALLVALUE", runner: CALLVALUE },
   0x35: { name: "CALLDATALOAD", runner: CALLDATALOAD },
+  0x36: { name: "CALLDATASIZE", runner: CALLDATASIZE },
+  0x37: { name: "CALLDATACOPY", runner: CALLDATACOPY },
+  0x38: { name: "CODESIZE", runner: CODESIZE },
 
   0x3a: { name: "GASPRICE", runner: GASPRICE },
 
