@@ -238,7 +238,16 @@ function GASPRICE(ms: MachineState) {
   ms.stack.push(res)
 }
 
-// todo: 0x3b .. 0x40
+// 0x3b
+function EXTCODESIZE(ms: MachineState) {
+  const address = ms.stack.pop()
+  const addressHex = parsers.BigintIntoHexString(address)
+  const extAccount = ms.globalState?.getAccount(addressHex)
+  const res = extAccount?.code?.length ?? 0
+  ms.stack.push(BigInt(res))
+}
+
+// todo: 0x3c .. 0x40
 
 // 0x41
 function COINBASE(ms: MachineState) {
@@ -404,6 +413,7 @@ const runners: Runners = {
   0x39: { name: "CODECOPY", runner: CODECOPY },
 
   0x3a: { name: "GASPRICE", runner: GASPRICE },
+  0x3b: { name: "EXTCODESIZE", runner: EXTCODESIZE },
 
   0x41: { name: "COINBASE", runner: COINBASE },
   0x42: { name: "TIMESTAMP", runner: TIMESTAMP },

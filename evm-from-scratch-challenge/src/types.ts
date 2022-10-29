@@ -14,7 +14,7 @@ export interface Test {
   code: Code
   tx?: Partial<TestTxData>
   block?: Partial<Block>
-  state?: State
+  state?: TestState
   expect: {
     success?: boolean
     stack: string[]
@@ -22,6 +22,8 @@ export interface Test {
 }
 
 type TestTxData = Omit<TxData, "data"> & { data: string }
+type TestAccount = Omit<Account, "code"> & { code: Code }
+type TestState = Record<Address, TestAccount>
 
 export interface TxData {
   to: Address
@@ -38,6 +40,7 @@ export interface State {
 
 export interface Account {
   balance?: Value
+  code?: Uint8Array
 }
 
 export interface Block {

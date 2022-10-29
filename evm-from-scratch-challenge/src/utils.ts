@@ -24,6 +24,7 @@ export function buildState(t: Test): State {
   for (const address in t.state)
     state[address] = {
       balance: BigInt(t.state[address].balance || 0),
+      code: hexStringToUint8Array(t.state[address].code?.bin || "0x00"),
     }
 
   return state
