@@ -27,3 +27,4 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 8](./day08.md): TxData, globalState, Block data & related Opcodes
 - [x] [Day 9](./day09.md): More Environmental Opcodes & CALLDATALOAD. "Officially" started the challenge!
 - [x] [Day 10](./day10.md): CALLDATASIZE, CALLDATACOPY, CODESIZE, CODECOPY Opcodes
+- [x] [Day 11](./day11.md): EXTCODESIZE, EXTCODECOPY, SELFBALANCE Opcodes
