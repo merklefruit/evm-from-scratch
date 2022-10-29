@@ -247,7 +247,26 @@ function EXTCODESIZE(ms: MachineState) {
   ms.stack.push(BigInt(res))
 }
 
-// todo: 0x3c .. 0x40
+// 0x3c
+function EXTCODECOPY(ms: MachineState) {
+  const address = ms.stack.pop()
+  const addressHex = parsers.BigintIntoHexString(address)
+  const extAccount = ms.globalState?.getAccount(addressHex)
+
+  const memOffset = Number(ms.stack.pop())
+  const codeOffset = Number(ms.stack.pop())
+  const size = Number(ms.stack.pop())
+
+  const codeBytesPortion = extAccount?.code?.subarray(codeOffset, codeOffset + size)
+  const codeBuffer = Buffer.from(codeBytesPortion ?? Buffer.alloc(0))
+
+  const code = Buffer.alloc(size)
+  codeBuffer.copy(code, 0, 0)
+
+  ms.memory.write(memOffset, code, size)
+}
+
+// todo: 0x3d 0x3f 0x40
 
 // 0x41
 function COINBASE(ms: MachineState) {
@@ -414,6 +433,7 @@ const runners: Runners = {
 
   0x3a: { name: "GASPRICE", runner: GASPRICE },
   0x3b: { name: "EXTCODESIZE", runner: EXTCODESIZE },
+  0x3c: { name: "EXTCODECOPY", runner: EXTCODECOPY },
 
   0x41: { name: "COINBASE", runner: COINBASE },
   0x42: { name: "TIMESTAMP", runner: TIMESTAMP },
