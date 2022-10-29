@@ -266,7 +266,7 @@ function EXTCODECOPY(ms: MachineState) {
   ms.memory.write(memOffset, code, size)
 }
 
-// todo: 0x3d 0x3f 0x40
+// todo: 0x3d 0x3e 0x3f 0x40
 
 // 0x41
 function COINBASE(ms: MachineState) {
@@ -304,6 +304,14 @@ function CHAINID(ms: MachineState) {
   const res = ms.block.chainid
   ms.stack.push(BigInt(res))
 }
+
+// 0x47
+function SELFBALANCE(ms: MachineState) {
+  const res = ms.globalState.getBalance(ms.txData.to)
+  ms.stack.push(res)
+}
+
+// todo: 0x48
 
 // 0x50
 function POP(ms: MachineState) {
@@ -441,6 +449,7 @@ const runners: Runners = {
   0x44: { name: "DIFFICULTY", runner: DIFFICULTY },
   0x45: { name: "GASLIMIT", runner: GASLIMIT },
   0x46: { name: "CHAINID", runner: CHAINID },
+  0x47: { name: "SELFBALANCE", runner: SELFBALANCE },
 
   0x50: { name: "POP", runner: POP },
   0x51: { name: "MLOAD", runner: MLOAD },
