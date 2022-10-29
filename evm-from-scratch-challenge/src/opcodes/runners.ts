@@ -1,13 +1,6 @@
 import { keccak256 } from "ethereum-cryptography/keccak"
+import { buildOpcodeRangeObjects, bigMath, parsers } from "./utils"
 import ERRORS from "../errors"
-import {
-  bigMath,
-  buildOpcodeRangeObjects,
-  parseBigIntIntoBytes,
-  parseBigintIntoHexString,
-  parseBytesIntoBigInt,
-  parseHexStringIntoBigInt,
-} from "./utils"
 
 import type { MachineState } from "../machine-state/types"
 import type { Runners } from "./types"
@@ -154,20 +147,20 @@ function SHA3(ms: MachineState) {
   const [offset, size] = ms.stack.popN(2)
   const data = ms.memory.read(Number(offset)).subarray(0, Number(size))
   const hash = keccak256(data)
-  const res = parseBytesIntoBigInt(hash)
+  const res = parsers.BytesIntoBigInt(hash)
   ms.stack.push(res)
 }
 
 // 0x30
 function ADDRESS(ms: MachineState) {
   const res = ms.txData.to
-  ms.stack.push(parseHexStringIntoBigInt(res))
+  ms.stack.push(parsers.HexStringIntoBigInt(res))
 }
 
 // 0x31
 function BALANCE(ms: MachineState) {
   const address = ms.stack.pop()
-  const addressHex = parseBigintIntoHexString(address)
+  const addressHex = parsers.BigintIntoHexString(address)
   const res = ms.globalState.getBalance(addressHex)
   ms.stack.push(res)
 }
@@ -175,13 +168,13 @@ function BALANCE(ms: MachineState) {
 // 0x32
 function ORIGIN(ms: MachineState) {
   const res = ms.txData.origin
-  ms.stack.push(parseHexStringIntoBigInt(res))
+  ms.stack.push(parsers.HexStringIntoBigInt(res))
 }
 
 // 0x33
 function CALLER(ms: MachineState) {
   const res = ms.txData.from
-  ms.stack.push(parseHexStringIntoBigInt(res))
+  ms.stack.push(parsers.HexStringIntoBigInt(res))
 }
 
 // 0x34
@@ -198,7 +191,7 @@ function CALLDATALOAD(ms: MachineState) {
   const calldataWordPadded = Buffer.alloc(32)
   calldataWord.copy(calldataWordPadded, 0, 0)
 
-  const res = parseBytesIntoBigInt(calldataWordPadded)
+  const res = parsers.BytesIntoBigInt(calldataWordPadded)
   ms.stack.push(res)
 }
 
@@ -250,7 +243,7 @@ function GASPRICE(ms: MachineState) {
 // 0x41
 function COINBASE(ms: MachineState) {
   const res = ms.block.coinbase
-  ms.stack.push(parseHexStringIntoBigInt(res))
+  ms.stack.push(parsers.HexStringIntoBigInt(res))
 }
 
 // 0x42
@@ -275,7 +268,7 @@ function DIFFICULTY(ms: MachineState) {
 function GASLIMIT(ms: MachineState) {
   const res = ms.block.gaslimit
   console.log(res)
-  ms.stack.push(parseHexStringIntoBigInt(res))
+  ms.stack.push(parsers.HexStringIntoBigInt(res))
 }
 
 // 0x46
@@ -292,21 +285,21 @@ function POP(ms: MachineState) {
 // 0x51
 function MLOAD(ms: MachineState) {
   const offset = Number(ms.stack.pop())
-  const val = parseBytesIntoBigInt(ms.memory.read(offset))
+  const val = parsers.BytesIntoBigInt(ms.memory.read(offset))
   ms.stack.push(val)
 }
 
 // 0x52
 function MSTORE(ms: MachineState) {
   const [offset, val] = ms.stack.popN(2)
-  const word = parseBigIntIntoBytes(val, 32)
+  const word = parsers.BigIntIntoBytes(val, 32)
   ms.memory.write(Number(offset), word, 32)
 }
 
 // 0x53
 function MSTORE8(ms: MachineState) {
   const [offset, val] = ms.stack.popN(2)
-  const byte = parseBigIntIntoBytes(val, 1)
+  const byte = parsers.BigIntIntoBytes(val, 1)
   ms.memory.write(Number(offset), byte, 1)
 }
 
@@ -352,7 +345,7 @@ function PUSH(ms: MachineState) {
   if (ms.pc + size >= ms.code.length) throw new Error(ERRORS.PC_OUT_OF_BOUNDS)
 
   const value = ms.code.slice(ms.pc + 1, ms.pc + size + 1)
-  const valueAsBigInt = parseBytesIntoBigInt(value)
+  const valueAsBigInt = parsers.BytesIntoBigInt(value)
 
   ms.pc += size
   ms.stack.push(valueAsBigInt)

@@ -13,24 +13,23 @@ export function buildOpcodeRangeObjects(
   return rangeRunners
 }
 
-export function parseBytesIntoBigInt(bytes: Uint8Array): bigint {
-  let array: string[] = []
-  for (const byte of bytes) array.push(byte.toString(16).padStart(2, "0"))
-  return BigInt("0x" + array.join(""))
-}
-
-export function parseBigIntIntoBytes(bigint: bigint, length: number): Buffer {
-  const hex = bigint.toString(16).padStart(2 * length, "0")
-  return Buffer.from(hex, "hex")
-}
-
-export function parseHexStringIntoBigInt(hex: string): bigint {
-  if (!hex.startsWith("0x")) hex = hex.padStart(2 * hex.length + 2, "0x")
-  return BigInt(hex)
-}
-
-export function parseBigintIntoHexString(bigint: bigint): string {
-  return "0x" + bigint.toString(16)
+export const parsers = {
+  BytesIntoBigInt(bytes: Uint8Array): bigint {
+    let array: string[] = []
+    for (const byte of bytes) array.push(byte.toString(16).padStart(2, "0"))
+    return BigInt("0x" + array.join(""))
+  },
+  BigIntIntoBytes(bigint: bigint, length: number): Buffer {
+    const hex = bigint.toString(16).padStart(2 * length, "0")
+    return Buffer.from(hex, "hex")
+  },
+  HexStringIntoBigInt(hex: string): bigint {
+    if (!hex.startsWith("0x")) hex = hex.padStart(2 * hex.length + 2, "0x")
+    return BigInt(hex)
+  },
+  BigintIntoHexString(bigint: bigint): string {
+    return "0x" + bigint.toString(16)
+  },
 }
 
 // https://stackoverflow.com/questions/51867270
