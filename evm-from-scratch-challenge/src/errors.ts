@@ -9,6 +9,8 @@ enum ERRORS {
   JUMP_TO_INVALID_DESTINATION = "jump to invalid destination",
   INVALID_MEMORY_OFFSET = "invalid memory offset",
   INVALID_MEMORY_VALUE_SIZE = "invalid memory value size",
+  INVALID_STORAGE_KEY_SIZE = "invalid storage key size",
+  INVALID_STORAGE_VALUE_SIZE = "invalid storage value size",
 
   STOP = "STOP",
   REVERT = "REVERT",
