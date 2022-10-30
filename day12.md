@@ -29,7 +29,7 @@ Here's a simple bird's eye view of what happens:
 
 1. The storage trie keeps info about smart contract data storage slots and their values.
 2. The root of that tree (storageRoot) is then kept in the State Trie which also tracks all the accounts state.
-3. The root of the State Trie is (stateRoot) is set in the block header.
+3. The root of the State Trie (stateRoot) is set in the block header.
 4. The same goes for the receipts trie (receiptsRoot) and the transaction trie (transactionsRoot).
 
 ### A closer look at the trie structure
