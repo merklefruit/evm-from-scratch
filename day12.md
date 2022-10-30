@@ -23,7 +23,7 @@ Now for the EVM-related part. The storage can be accessed in read and write oper
 
 ## TL;DR and reading notes
 
-The Ethereum protocol main data structure is a [Merkle Patricia Tree](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/) (also read more [here](https://github.com/ethereum/wiki/wiki/Patricia-Tree) and ). Importantly, data inside this state trie are not stored directly in the blocks of the blockchain. What is stored on each block is simply the hash of the root of the state trie, transaction trie and receipts trie. This is a very important point to understand.
+The Ethereum protocol main data structure is a [Merkle Patricia Tree](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/) (also read more [here](https://github.com/ethereum/wiki/wiki/Patricia-Tree)). Importantly, data inside this state trie are not stored directly in the blocks of the blockchain. What is stored on each block is simply the hash of the root of the state trie, transaction trie and receipts trie. This is a very important point to understand.
 
 Here's a simple bird's eye view of what happens:
 
