@@ -28,3 +28,4 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 9](./day09.md): More Environmental Opcodes & CALLDATALOAD. "Officially" started the challenge!
 - [x] [Day 10](./day10.md): CALLDATASIZE, CALLDATACOPY, CODESIZE, CODECOPY Opcodes
 - [x] [Day 11](./day11.md): EXTCODESIZE, EXTCODECOPY, SELFBALANCE Opcodes
+- [x] [Day 12](./day12.md): Research & study on the Storage / data layer of the Ethereum protocol
