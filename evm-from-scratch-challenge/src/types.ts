@@ -9,16 +9,19 @@ export interface Code {
   bin: string
 }
 
+interface TestOutput {
+  success: boolean
+  stack: string[]
+  return: string
+}
+
 export interface Test {
   name: string
   code: Code
   tx?: Partial<TestTxData>
   block?: Partial<Block>
   state?: TestState
-  expect: {
-    success?: boolean
-    stack: string[]
-  }
+  expect: Partial<TestOutput>
 }
 
 type TestTxData = Omit<TxData, "data"> & { data: string }

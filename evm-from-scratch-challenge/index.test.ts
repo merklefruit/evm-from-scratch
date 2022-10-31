@@ -15,11 +15,13 @@ for (const t of tests as Test[]) {
 
     const result = await evm(code, txData, state, block)
 
-    // Always check stack result
-    expect(result.stack).toEqual(t.expect.stack.map((item) => BigInt(item)))
+    if (typeof t.expect.stack !== "undefined")
+      expect(result.stack).toEqual(t.expect.stack.map((item) => BigInt(item)))
 
-    // Conditionally check success result
     if (typeof t.expect.success !== "undefined")
       expect(result.success).toEqual(t.expect.success)
+
+    if (typeof t.expect.return !== "undefined")
+      expect(result.return).toEqual(t.expect.return)
   })
 }

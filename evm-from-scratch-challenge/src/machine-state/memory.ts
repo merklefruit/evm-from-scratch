@@ -24,17 +24,17 @@ export default class Memory {
     for (const byte of value) this._memory[offset++] = byte
   }
 
-  read(offset: number): Buffer {
+  read(offset: number, size: number): Buffer {
     if (offset < 0) throw new Error(ERRORS.INVALID_MEMORY_OFFSET)
 
-    const overflow = Math.ceil((offset + 32) / 32) * 32 - this.size
-    if (!overflow) return this._memory.subarray(offset, offset + 32)
+    const overflow = Math.ceil((offset + size) / 32) * 32 - this.size
+    if (!overflow) return this._memory.subarray(offset, offset + size)
 
     this._memory = Buffer.concat([this._memory, Buffer.alloc(overflow)])
 
-    const word = Buffer.alloc(32)
-    this._memory.copy(word, 0, offset)
-    return word
+    const output = Buffer.alloc(size)
+    this._memory.copy(output, 0, offset)
+    return output
   }
 
   get size(): number {

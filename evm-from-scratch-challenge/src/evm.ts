@@ -29,7 +29,7 @@ export default class EVM {
   private _ms: MachineState
 
   constructor(_code: Uint8Array, _txData: TxData, _globalState: State, _block: Block) {
-    this._origin = _txData?.origin
+    this._origin = _txData.origin
     this._gasPrice = 0n
     this._gasLimit = 0n
 
@@ -38,6 +38,7 @@ export default class EVM {
       storage: new Storage(),
       memory: new Memory(),
       stack: new Stack(),
+      returnData: Buffer.alloc(0),
       gasAvailable: 0n, // todo
       txData: _txData,
       block: _block,
@@ -53,10 +54,8 @@ export default class EVM {
 
     // execute opcodes sequentially
     while (this._ms.pc < this._ms.code.length) {
-      const opcode = this.currentOpcode
-
       try {
-        await this.execute(opcode)
+        await this.execute(this.currentOpcode)
       } catch (err: any) {
         console.log("Encountered runtime error:", err.message)
         if (err.message === ERRORS.STOP) success = true
@@ -64,7 +63,11 @@ export default class EVM {
       }
     }
 
-    const result = { success, stack: this._ms.stack.dump }
+    const result = {
+      success,
+      stack: this._ms.stack.dump,
+      return: this._ms.returnData.toString("hex"),
+    }
 
     return result
   }

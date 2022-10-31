@@ -145,7 +145,7 @@ function BYTE(ms: MachineState) {
 // 0x20
 function SHA3(ms: MachineState) {
   const [offset, size] = ms.stack.popN(2)
-  const data = ms.memory.read(Number(offset)).subarray(0, Number(size))
+  const data = ms.memory.read(Number(offset), 32).subarray(0, Number(size))
   const hash = keccak256(data)
   const res = parsers.BytesIntoBigInt(hash)
   ms.stack.push(res)
@@ -321,7 +321,7 @@ function POP(ms: MachineState) {
 // 0x51
 function MLOAD(ms: MachineState) {
   const offset = Number(ms.stack.pop())
-  const val = parsers.BytesIntoBigInt(ms.memory.read(offset))
+  const val = parsers.BytesIntoBigInt(ms.memory.read(offset, 32))
   ms.stack.push(val)
 }
 
@@ -381,7 +381,7 @@ function MSIZE(ms: MachineState) {
   ms.stack.push(BigInt(ms.memory.size))
 }
 
-// TODO: 0x5a ... 0x5a
+// TODO: GAS
 
 // 0x5b
 function JUMPDEST(ms: MachineState) {
@@ -411,6 +411,26 @@ function DUP(ms: MachineState) {
 function SWAP(ms: MachineState) {
   const pos = ms.code[ms.pc] - 0x8f
   ms.stack.swap(pos)
+}
+
+// 0xf3
+function RETURN(ms: MachineState) {
+  const [offset, size] = ms.stack.popN(2)
+  const ret = ms.memory.read(Number(offset), Number(size))
+  ms.returnData = ret
+  ms.pc = ms.code.length
+
+  throw new Error(ERRORS.STOP)
+}
+
+// 0xfd
+function REVERT(ms: MachineState) {
+  const [offset, size] = ms.stack.popN(2)
+  const ret = ms.memory.read(Number(offset), Number(size))
+  ms.returnData = ret
+  ms.pc = ms.code.length
+
+  throw new Error(ERRORS.REVERT)
 }
 
 // ******************************* RUNNERS OBJECT *******************************
@@ -481,6 +501,10 @@ const runners: Runners = {
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),
   ...buildOpcodeRangeObjects(0x80, 0x8f, "DUP", DUP),
   ...buildOpcodeRangeObjects(0x90, 0x9f, "SWAP", SWAP),
+
+  0xf3: { name: "RETURN", runner: RETURN },
+
+  0xfd: { name: "REVERT", runner: REVERT },
 }
 
 export default runners

@@ -26,6 +26,7 @@ import type { Block, Gas, ProgramCounter, TxData } from "../types"
 // - storage: the transient account state map of the current execution context
 // - globalState: the global state of the current execution context
 // - block: the block data of the current execution context
+// - returnData: the return data of the current execution context
 
 export interface MachineState {
   gasAvailable: Gas
@@ -38,4 +39,5 @@ export interface MachineState {
   storage: Storage
   globalState: GlobalState
   block: Block
+  returnData: Buffer
 }
