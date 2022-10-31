@@ -13,7 +13,7 @@ These are the questions I will try to answer today and in the coming days.
 
 ## Storage
 
-For this challenge, we don't actually need to recreate anything remotely as complex as the real Ethereum storag (luckily) but I'd like to understand how it works since I'm already here.
+For this challenge, we don't actually need to recreate anything remotely as complex as the real Ethereum storage (luckily) but I'd like to understand how it works since I'm already here.
 
 The storage is a key-value store holding data about each account indexed by address. The data is stored in the form of 256-bit words. The storage is a part of the state of the blockchain and is updated by the transactions.
 

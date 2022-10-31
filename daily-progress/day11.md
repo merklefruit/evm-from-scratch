@@ -6,7 +6,7 @@ Today I implemented `EXTCODESIZE` which was pretty easy, I just had to modify my
 
 After that, I tried my hand at `EXTCODECOPY`. This one was definitely one of the longest ones in terms of lines of code, but after having dealt with many Opcodes handling memory slices and manipulating them, I was able to complete it quite quickly.
 
-Here's a rundown of what `EXTCODECOPY` does: fun-fact, it's the first Opcode that takes 4 arguments from the stack!
+Here's a rundown of what `EXTCODECOPY` does: fun-fact, it's the first Opcode I encountered that takes 4 arguments from the stack!
 
 ```typescript
 function EXTCODECOPY(ms: MachineState) {
