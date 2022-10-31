@@ -29,3 +29,4 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 10](./daily-progress/day10.md): CALLDATASIZE, CALLDATACOPY, CODESIZE, CODECOPY Opcodes
 - [x] [Day 11](./daily-progress/day11.md): EXTCODESIZE, EXTCODECOPY, SELFBALANCE Opcodes
 - [x] [Day 12](./daily-progress/day12.md): Research & study on the Storage / data layer of the Ethereum protocol
+- [x] [Day 13](./daily-progress/day13.md): Simple Storage implementation, SSTORE, SLOAD, RETURN, REVERT Opcodes
