@@ -31,7 +31,8 @@ export default class Storage {
   }
 
   public set(address: Address, key: string, value: Buffer): void {
-    if (key.length !== 32) throw new Error(ERRORS.INVALID_STORAGE_KEY_SIZE)
+    // todo: add validation for key size after switching to buffers
+
     if (value.length > 32) throw new Error(ERRORS.INVALID_STORAGE_VALUE_SIZE)
 
     const oldStorageValue = this._storage.get(address)?.get(key)
@@ -44,5 +45,13 @@ export default class Storage {
     console.log("new value:", value)
 
     this._storage.get(address)!.set(key, value)
+  }
+
+  public getAsBigInt(address: Address, key: string): bigint {
+    return BigInt("0x" + this.get(address, key).toString("hex"))
+  }
+
+  public setAsBigInt(address: Address, key: string, value: bigint): void {
+    this.set(address, key, Buffer.from(value.toString(16).padStart(64, "0"), "hex"))
   }
 }

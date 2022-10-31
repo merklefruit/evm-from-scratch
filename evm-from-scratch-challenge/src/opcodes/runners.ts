@@ -339,7 +339,20 @@ function MSTORE8(ms: MachineState) {
   ms.memory.write(Number(offset), byte, 1)
 }
 
-// todo: sload, sstore
+// 0x54
+function SLOAD(ms: MachineState) {
+  const key = ms.stack.pop()
+  const keyHex = parsers.BigintIntoHexString(key)
+  const val = ms.storage.getAsBigInt(ms.txData.to, keyHex)
+  ms.stack.push(val)
+}
+
+// 0x55
+function SSTORE(ms: MachineState) {
+  const [key, val] = ms.stack.popN(2)
+  const keyHex = parsers.BigintIntoHexString(key)
+  ms.storage.setAsBigInt(ms.txData.to, keyHex, val)
+}
 
 // 0x56
 function JUMP(ms: MachineState) {
@@ -455,6 +468,8 @@ const runners: Runners = {
   0x51: { name: "MLOAD", runner: MLOAD },
   0x52: { name: "MSTORE", runner: MSTORE },
   0x53: { name: "MSTORE8", runner: MSTORE8 },
+  0x54: { name: "SLOAD", runner: SLOAD },
+  0x55: { name: "SSTORE", runner: SSTORE },
 
   0x56: { name: "JUMP", runner: JUMP },
   0x57: { name: "JUMPI", runner: JUMPI },
