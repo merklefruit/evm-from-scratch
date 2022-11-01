@@ -381,7 +381,10 @@ function MSIZE(ms: MachineState) {
   ms.stack.push(BigInt(ms.memory.size))
 }
 
-// TODO: GAS
+// 0x5a
+function GAS(ms: MachineState) {
+  ms.stack.push(ms.gasAvailable)
+}
 
 // 0x5b
 function JUMPDEST(ms: MachineState) {
@@ -495,7 +498,7 @@ const runners: Runners = {
   0x57: { name: "JUMPI", runner: JUMPI },
   0x58: { name: "PC", runner: PC },
   0x59: { name: "MSIZE", runner: MSIZE },
-
+  0x5a: { name: "GAS", runner: GAS },
   0x5b: { name: "JUMPDEST", runner: JUMPDEST },
 
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),

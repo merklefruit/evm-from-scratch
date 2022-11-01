@@ -1,3 +1,4 @@
+import { MAX_256_BITS } from "./constants"
 import runners from "./opcodes/runners"
 import ERRORS from "./errors"
 
@@ -39,7 +40,7 @@ export default class EVM {
       memory: new Memory(),
       stack: new Stack(),
       returnData: Buffer.alloc(0),
-      gasAvailable: 0n, // todo
+      gasAvailable: MAX_256_BITS - 1n, // todo
       txData: _txData,
       block: _block,
       code: _code,

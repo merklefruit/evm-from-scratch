@@ -30,6 +30,11 @@ export const parsers = {
   BigintIntoHexString(bigint: bigint): string {
     return "0x" + bigint.toString(16)
   },
+  hexStringToUint8Array(hexString: string): Uint8Array {
+    return new Uint8Array(
+      (hexString?.match(/../g) || []).map((byte) => parseInt(byte, 16))
+    )
+  },
 }
 
 // https://stackoverflow.com/questions/51867270

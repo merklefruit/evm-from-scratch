@@ -1,10 +1,7 @@
+import { parsers } from "./opcodes/utils"
 import { ZERO_ADDRESS } from "./constants"
 
 import type { Test, TxData, State, Block } from "./types"
-
-export function hexStringToUint8Array(hexString: string): Uint8Array {
-  return new Uint8Array((hexString?.match(/../g) || []).map((byte) => parseInt(byte, 16)))
-}
 
 export function buildTxData(t: Test): TxData {
   return {
@@ -24,7 +21,7 @@ export function buildState(t: Test): State {
   for (const address in t.state)
     state[address] = {
       balance: BigInt(t.state[address].balance || 0),
-      code: hexStringToUint8Array(t.state[address].code?.bin || "0x00"),
+      code: parsers.hexStringToUint8Array(t.state[address].code?.bin || "0x00"),
     }
 
   return state

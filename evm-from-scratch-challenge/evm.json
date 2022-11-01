@@ -17,7 +17,7 @@
       "bin": "6001"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -27,7 +27,7 @@
       "bin": "60016002"
     },
     "expect": {
-      "stack": ["2", "1"]
+      "stack": ["0x2", "0x1"]
     }
   },
   {
@@ -37,7 +37,7 @@
       "bin": "6001600250"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -47,7 +47,7 @@
       "bin": "6001006002"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -57,7 +57,7 @@
       "bin": "6001600201"
     },
     "expect": {
-      "stack": ["3"]
+      "stack": ["0x3"]
     }
   },
   {
@@ -67,7 +67,7 @@
       "bin": "7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff600201"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -77,7 +77,7 @@
       "bin": "6002600302"
     },
     "expect": {
-      "stack": ["6"]
+      "stack": ["0x6"]
     }
   },
   {
@@ -97,7 +97,7 @@
       "bin": "6002600303"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -117,7 +117,7 @@
       "bin": "6002600604"
     },
     "expect": {
-      "stack": ["3"]
+      "stack": ["0x3"]
     }
   },
   {
@@ -127,7 +127,7 @@
       "bin": "6006600204"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -137,7 +137,7 @@
       "bin": "6000600204"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -147,7 +147,7 @@
       "bin": "600a600a05"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -157,7 +157,7 @@
       "bin": "7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe05"
     },
     "expect": {
-      "stack": ["2"]
+      "stack": ["0x2"]
     }
   },
   {
@@ -177,7 +177,7 @@
       "bin": "6003600a06"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -187,7 +187,7 @@
       "bin": "6011600506"
     },
     "expect": {
-      "stack": ["5"]
+      "stack": ["0x5"]
     }
   },
   {
@@ -197,7 +197,7 @@
       "bin": "6000600206"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -207,7 +207,7 @@
       "bin": "6003600a07"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -227,7 +227,7 @@
       "bin": "6000600207"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -237,7 +237,7 @@
       "bin": "600a600910"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -247,7 +247,7 @@
       "bin": "600a600a10"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -257,7 +257,7 @@
       "bin": "600a600b10"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -267,7 +267,7 @@
       "bin": "6009600a11"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -277,7 +277,7 @@
       "bin": "600a600a11"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -287,7 +287,7 @@
       "bin": "600b600a11"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -297,7 +297,7 @@
       "bin": "60007fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff12"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -307,7 +307,7 @@
       "bin": "7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff12"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -317,7 +317,7 @@
       "bin": "7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff600012"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -327,7 +327,7 @@
       "bin": "6009600a13"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -337,7 +337,7 @@
       "bin": "7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe13"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -347,7 +347,7 @@
       "bin": "600a600b13"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -357,7 +357,7 @@
       "bin": "600a600a14"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -367,7 +367,7 @@
       "bin": "6009600a14"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -377,7 +377,7 @@
       "bin": "600915"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -387,7 +387,7 @@
       "bin": "600015"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -397,7 +397,7 @@
       "bin": "600e600316"
     },
     "expect": {
-      "stack": ["2"]
+      "stack": ["0x2"]
     }
   },
   {
@@ -477,7 +477,7 @@
       "bin": "60018001"
     },
     "expect": {
-      "stack": ["2"]
+      "stack": ["0x2"]
     }
   },
   {
@@ -487,7 +487,7 @@
       "bin": "60016002600382"
     },
     "expect": {
-      "stack": ["1", "3", "2", "1"]
+      "stack": ["0x1", "0x3", "0x2", "0x1"]
     }
   },
   {
@@ -497,7 +497,7 @@
       "bin": "6001600290"
     },
     "expect": {
-      "stack": ["1", "2"]
+      "stack": ["0x1", "0x2"]
     }
   },
   {
@@ -507,37 +507,18 @@
       "bin": "600160026003600492"
     },
     "expect": {
-      "stack": ["1", "3", "2", "4"]
+      "stack": ["0x1", "0x3", "0x2", "0x4"]
     }
   },
   {
-    "name": "JUMP",
+    "name": "INVALID",
     "code": {
-      "asm": "PUSH1 5\nJUMP\nPUSH1 1\nJUMPDEST\nPUSH1 2",
-      "bin": "60055660015b6002"
+      "asm": "INVALID",
+      "bin": "fe"
     },
     "expect": {
-      "stack": ["2"]
-    }
-  },
-  {
-    "name": "JUMPI (no jump)",
-    "code": {
-      "asm": "PUSH1 0\nPUSH1 7\nJUMPI\nPUSH1 1\nJUMPDEST\nPUSH1 2\nPOP",
-      "bin": "600060075760015b600250"
-    },
-    "expect": {
-      "stack": ["1"]
-    }
-  },
-  {
-    "name": "JUMPI (jump)",
-    "code": {
-      "asm": "PUSH1 1\nPUSH1 7\nJUMPI\nPUSH1 1\nJUMPDEST\nPUSH1 2",
-      "bin": "600160075760015b6002"
-    },
-    "expect": {
-      "stack": ["2"]
+      "success": false,
+      "stack": []
     }
   },
   {
@@ -547,7 +528,7 @@
       "bin": "58"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -557,7 +538,47 @@
       "bin": "60005058"
     },
     "expect": {
-      "stack": ["3"]
+      "stack": ["0x3"]
+    }
+  },
+  {
+    "name": "GAS",
+    "code": {
+      "asm": "GAS",
+      "bin": "5a"
+    },
+    "expect": {
+      "stack": ["0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"]
+    }
+  },
+  {
+    "name": "JUMP",
+    "code": {
+      "asm": "PUSH1 5\nJUMP\nPUSH1 1\nJUMPDEST\nPUSH1 2",
+      "bin": "60055660015b6002"
+    },
+    "expect": {
+      "stack": ["0x2"]
+    }
+  },
+  {
+    "name": "JUMPI (no jump)",
+    "code": {
+      "asm": "PUSH1 0\nPUSH1 7\nJUMPI\nPUSH1 1\nJUMPDEST\nPUSH1 2\nPOP",
+      "bin": "600060075760015b600250"
+    },
+    "expect": {
+      "stack": ["0x1"]
+    }
+  },
+  {
+    "name": "JUMPI (jump)",
+    "code": {
+      "asm": "PUSH1 1\nPUSH1 7\nJUMPI\nPUSH1 1\nJUMPDEST\nPUSH1 2",
+      "bin": "600160075760015b6002"
+    },
+    "expect": {
+      "stack": ["0x2"]
     }
   },
   {
@@ -597,7 +618,7 @@
       "bin": "59"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -643,14 +664,14 @@
   {
     "name": "ADDRESS",
     "tx": {
-      "to": "0xaaa"
+      "to": "0x1000000000000000000000000000000000000aaa"
     },
     "code": {
       "asm": "ADDRESS",
       "bin": "30"
     },
     "expect": {
-      "stack": ["0xaaa"]
+      "stack": ["0x1000000000000000000000000000000000000aaa"]
     }
   },
   {
@@ -670,7 +691,7 @@
     "name": "BALANCE",
     "state": {
       "0x1e79b045dc29eae9fdc69673c9dcd7c53e5e159d": {
-        "balance": "100"
+        "balance": "0x100"
       }
     },
     "code": {
@@ -678,7 +699,7 @@
       "bin": "731e79b045dc29eae9fdc69673c9dcd7c53e5e159d31"
     },
     "expect": {
-      "stack": ["100"]
+      "stack": ["0x100"]
     }
   },
   {
@@ -688,7 +709,7 @@
       "bin": "73af69610ea9ddc95883f97a6a3171d52165b69b0331"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -720,27 +741,27 @@
   {
     "name": "TIMESTAMP",
     "block": {
-      "timestamp": "15000001"
+      "timestamp": "0xe4e1c1"
     },
     "code": {
       "asm": "TIMESTAMP",
       "bin": "42"
     },
     "expect": {
-      "stack": ["15000001"]
+      "stack": ["0xe4e1c1"]
     }
   },
   {
     "name": "NUMBER",
     "block": {
-      "number": "1000001"
+      "number": "0x1000001"
     },
     "code": {
       "asm": "NUMBER",
       "bin": "43"
     },
     "expect": {
-      "stack": ["1000001"]
+      "stack": ["0x1000001"]
     }
   },
   {
@@ -772,40 +793,40 @@
   {
     "name": "GASPRICE",
     "tx": {
-      "gasprice": "99"
+      "gasprice": "0x99"
     },
     "code": {
       "asm": "GASPRICE",
       "bin": "3a"
     },
     "expect": {
-      "stack": ["99"]
+      "stack": ["0x99"]
     }
   },
   {
     "name": "CHAINID",
     "block": {
-      "chainid": "1"
+      "chainid": "0x1"
     },
     "code": {
       "asm": "CHAINID",
       "bin": "46"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
     "name": "CALLVALUE",
     "tx": {
-      "value": "1000"
+      "value": "0x1000"
     },
     "code": {
       "asm": "CALLVALUE",
       "bin": "34"
     },
     "expect": {
-      "stack": ["1000"]
+      "stack": ["0x1000"]
     }
   },
   {
@@ -844,7 +865,7 @@
       "bin": "36"
     },
     "expect": {
-      "stack": ["32"]
+      "stack": ["0x20"]
     }
   },
   {
@@ -854,7 +875,7 @@
       "bin": "36"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
@@ -890,7 +911,7 @@
       "bin": "38"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -900,7 +921,7 @@
       "bin": "7300000000000000000000000000000000000000005038"
     },
     "expect": {
-      "stack": ["23"]
+      "stack": ["0x17"]
     }
   },
   {
@@ -930,13 +951,13 @@
       "bin": "731e79b045dc29eae9fdc69673c9dcd7c53e5e159d3b"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
     }
   },
   {
     "name": "EXTCODESIZE",
     "state": {
-      "0xaaa": {
+      "0x1000000000000000000000000000000000000aaa": {
         "code": {
           "asm": "PUSH1 1",
           "bin": "6001"
@@ -944,17 +965,17 @@
       }
     },
     "code": {
-      "asm": "PUSH20 0x0000000000000000000000000000000000000aaa\nEXTCODESIZE",
-      "bin": "730000000000000000000000000000000000000aaa3b"
+      "asm": "PUSH20 0x1000000000000000000000000000000000000aaa\nEXTCODESIZE",
+      "bin": "731000000000000000000000000000000000000aaa3b"
     },
     "expect": {
-      "stack": ["2"]
+      "stack": ["0x2"]
     }
   },
   {
     "name": "EXTCODECOPY",
     "state": {
-      "0xaaa": {
+      "0x1000000000000000000000000000000000000aaa": {
         "code": {
           "asm": null,
           "bin": "6001"
@@ -962,8 +983,8 @@
       }
     },
     "code": {
-      "asm": "PUSH1 32\nPUSH1 0\nPUSH1 0\nPUSH20 0x0000000000000000000000000000000000000aaa\nEXTCODECOPY\nPUSH1 0\nMLOAD",
-      "bin": "602060006000730000000000000000000000000000000000000aaa3c600051"
+      "asm": "PUSH1 32\nPUSH1 0\nPUSH1 0\nPUSH20 0x1000000000000000000000000000000000000aaa\nEXTCODECOPY\nPUSH1 0\nMLOAD",
+      "bin": "602060006000731000000000000000000000000000000000000aaa3c600051"
     },
     "expect": {
       "stack": ["0x6001000000000000000000000000000000000000000000000000000000000000"]
@@ -976,7 +997,7 @@
     },
     "state": {
       "0x1e79b045dc29eae9fdc69673c9dcd7c53e5e159d": {
-        "balance": "200"
+        "balance": "0x200"
       }
     },
     "code": {
@@ -984,7 +1005,7 @@
       "bin": "47"
     },
     "expect": {
-      "stack": ["200"]
+      "stack": ["0x200"]
     }
   },
   {
@@ -994,7 +1015,7 @@
       "bin": "6001600055600054"
     },
     "expect": {
-      "stack": ["1"]
+      "stack": ["0x1"]
     }
   },
   {
@@ -1004,45 +1025,152 @@
       "bin": "60026398fe5c2c556398fe5c2c54"
     },
     "expect": {
-      "stack": ["2"]
+      "stack": ["0x2"]
     }
   },
   {
-    "name": "SLOAD",
+    "name": "SLOAD (empty)",
     "code": {
       "asm": "PUSH1 0xff\nSLOAD",
       "bin": "60ff54"
     },
     "expect": {
-      "stack": ["0"]
+      "stack": ["0x0"]
+    }
+  },
+  {
+    "name": "LOG0",
+    "tx": {
+      "to": "0x1000000000000000000000000000000000000001"
+    },
+    "code": {
+      "asm": "PUSH1 0xaa\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nLOG0",
+      "bin": "60aa6000526001601fa0"
+    },
+    "expect": {
+      "logs": [
+        {
+          "address": "0x1000000000000000000000000000000000000001",
+          "data": "aa",
+          "topics": []
+        }
+      ]
+    }
+  },
+  {
+    "name": "LOG1",
+    "tx": {
+      "to": "0x1000000000000000000000000000000000000001"
+    },
+    "code": {
+      "asm": "PUSH1 0xbb\nPUSH1 0\nMSTORE\nPUSH32 0x1111111111111111111111111111111111111111111111111111111111111111\nPUSH1 1\nPUSH1 31\nLOG1",
+      "bin": "60bb6000527f11111111111111111111111111111111111111111111111111111111111111116001601fa1"
+    },
+    "expect": {
+      "logs": [
+        {
+          "address": "0x1000000000000000000000000000000000000001",
+          "data": "bb",
+          "topics": ["0x1111111111111111111111111111111111111111111111111111111111111111"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "LOG2",
+    "tx": {
+      "to": "0x1000000000000000000000000000000000000001"
+    },
+    "code": {
+      "asm": "PUSH1 0xcc\nPUSH1 0\nMSTORE\nPUSH32 0x1111111111111111111111111111111111111111111111111111111111111111\nPUSH32 0x2222222222222222222222222222222222222222222222222222222222222222\nPUSH1 1\nPUSH1 31\nLOG2",
+      "bin": "60cc6000527f11111111111111111111111111111111111111111111111111111111111111117f22222222222222222222222222222222222222222222222222222222222222226001601fa2"
+    },
+    "expect": {
+      "logs": [
+        {
+          "address": "0x1000000000000000000000000000000000000001",
+          "data": "cc",
+          "topics": [
+            "0x2222222222222222222222222222222222222222222222222222222222222222",
+            "0x1111111111111111111111111111111111111111111111111111111111111111"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "LOG3",
+    "tx": {
+      "to": "0x1000000000000000000000000000000000000001"
+    },
+    "code": {
+      "asm": "PUSH1 0xdd\nPUSH1 0\nMSTORE\nPUSH32 0x1111111111111111111111111111111111111111111111111111111111111111\nPUSH32 0x2222222222222222222222222222222222222222222222222222222222222222\nPUSH32 0x3333333333333333333333333333333333333333333333333333333333333333\nPUSH1 1\nPUSH1 31\nLOG3",
+      "bin": "60dd6000527f11111111111111111111111111111111111111111111111111111111111111117f22222222222222222222222222222222222222222222222222222222222222227f33333333333333333333333333333333333333333333333333333333333333336001601fa3"
+    },
+    "expect": {
+      "logs": [
+        {
+          "address": "0x1000000000000000000000000000000000000001",
+          "data": "dd",
+          "topics": [
+            "0x3333333333333333333333333333333333333333333333333333333333333333",
+            "0x2222222222222222222222222222222222222222222222222222222222222222",
+            "0x1111111111111111111111111111111111111111111111111111111111111111"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "LOG4",
+    "tx": {
+      "to": "0x1000000000000000000000000000000000000001"
+    },
+    "code": {
+      "asm": "PUSH1 0xee\nPUSH1 0\nMSTORE\nPUSH32 0x1111111111111111111111111111111111111111111111111111111111111111\nPUSH32 0x2222222222222222222222222222222222222222222222222222222222222222\nPUSH32 0x3333333333333333333333333333333333333333333333333333333333333333\nPUSH32 0x4444444444444444444444444444444444444444444444444444444444444444\nPUSH1 1\nPUSH1 31\nLOG4",
+      "bin": "60ee6000527f11111111111111111111111111111111111111111111111111111111111111117f22222222222222222222222222222222222222222222222222222222222222227f33333333333333333333333333333333333333333333333333333333333333337f44444444444444444444444444444444444444444444444444444444444444446001601fa4"
+    },
+    "expect": {
+      "logs": [
+        {
+          "address": "0x1000000000000000000000000000000000000001",
+          "data": "ee",
+          "topics": [
+            "0x4444444444444444444444444444444444444444444444444444444444444444",
+            "0x3333333333333333333333333333333333333333333333333333333333333333",
+            "0x2222222222222222222222222222222222222222222222222222222222222222",
+            "0x1111111111111111111111111111111111111111111111111111111111111111"
+          ]
+        }
+      ]
     }
   },
   {
     "name": "RETURN",
     "code": {
-      "asm": "PUSH1 0x42\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nRETURN",
-      "bin": "60426000526001601ff3"
+      "asm": "PUSH1 0xA2\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nRETURN",
+      "bin": "60a26000526001601ff3"
     },
     "expect": {
       "success": true,
-      "return": "42"
+      "return": "a2"
     }
   },
   {
     "name": "REVERT",
     "code": {
-      "asm": "PUSH1 0x42\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nREVERT",
-      "bin": "60426000526001601ffd"
+      "asm": "PUSH1 0xF1\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nREVERT",
+      "bin": "60f16000526001601ffd"
     },
     "expect": {
       "success": false,
-      "return": "42"
+      "return": "f1"
     }
   },
   {
     "name": "CALL",
     "state": {
-      "0xc42": {
+      "0x1000000000000000000000000000000000000c42": {
         "code": {
           "asm": "PUSH1 0x42\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nRETURN",
           "bin": "60426000526001601ff3"
@@ -1050,8 +1178,8 @@
       }
     },
     "code": {
-      "asm": "PUSH1 1\nPUSH1 31\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH20 0x0000000000000000000000000000000000000c42\nPUSH1 0\nCALL\nPUSH1 0\nMLOAD",
-      "bin": "6001601f600060006000730000000000000000000000000000000000000c426000f1600051"
+      "asm": "PUSH1 1\nPUSH1 31\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH20 0x1000000000000000000000000000000000000c42\nPUSH1 0\nCALL\nPUSH1 0\nMLOAD",
+      "bin": "6001601f600060006000731000000000000000000000000000000000000c426000f1600051"
     },
     "expect": {
       "stack": ["0x42", "0x1"]
@@ -1060,10 +1188,10 @@
   {
     "name": "CALL (returns address)",
     "tx": {
-      "to": "0xaaa"
+      "to": "0x1000000000000000000000000000000000000aaa"
     },
     "state": {
-      "0xc42": {
+      "0x1000000000000000000000000000000000000c42": {
         "code": {
           "asm": "CALLER\nPUSH1 0\nMSTORE\nPUSH1 32\nPUSH1 0\nRETURN",
           "bin": "3360005260206000f3"
@@ -1071,17 +1199,17 @@
       }
     },
     "code": {
-      "asm": "PUSH1 32\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH20 0x0000000000000000000000000000000000000c42\nPUSH1 0\nCALL\nPUSH1 0\nMLOAD",
-      "bin": "60206000600060006000730000000000000000000000000000000000000c426000f1600051"
+      "asm": "PUSH1 32\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH20 0x1000000000000000000000000000000000000c42\nPUSH1 0\nCALL\nPUSH1 0\nMLOAD",
+      "bin": "60206000600060006000731000000000000000000000000000000000000c426000f1600051"
     },
     "expect": {
-      "stack": ["0xaaa", "0x1"]
+      "stack": ["0x1000000000000000000000000000000000000aaa", "0x1"]
     }
   },
   {
     "name": "CALL (reverts)",
     "state": {
-      "0xc42": {
+      "0x1000000000000000000000000000000000000c42": {
         "code": {
           "asm": "PUSH1 0x42\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nREVERT",
           "bin": "60426000526001601ffd"
@@ -1089,11 +1217,114 @@
       }
     },
     "code": {
-      "asm": "PUSH1 1\nPUSH1 31\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH20 0x0000000000000000000000000000000000000c42\nPUSH1 0\nCALL\nPUSH1 0\nMLOAD",
-      "bin": "6001601f600060006000730000000000000000000000000000000000000c426000f1600051"
+      "asm": "PUSH1 1\nPUSH1 31\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH20 0x1000000000000000000000000000000000000c42\nPUSH1 0\nCALL\nPUSH1 0\nMLOAD",
+      "bin": "6001601f600060006000731000000000000000000000000000000000000c426000f1600051"
     },
     "expect": {
       "stack": ["0x42", "0x0"]
+    }
+  },
+  {
+    "name": "RETURNDATASIZE (empty)",
+    "code": {
+      "asm": "RETURNDATASIZE",
+      "bin": "3d"
+    },
+    "expect": {
+      "stack": ["0x0"]
+    }
+  },
+  {
+    "name": "RETURNDATASIZE",
+    "state": {
+      "0x1000000000000000000000000000000000000c42": {
+        "code": {
+          "asm": "PUSH1 0x42\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nRETURN",
+          "bin": "60426000526001601ff3"
+        }
+      }
+    },
+    "code": {
+      "asm": "PUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH20 0x1000000000000000000000000000000000000c42\nPUSH1 0\nCALL\nPOP\nRETURNDATASIZE",
+      "bin": "60006000600060006000731000000000000000000000000000000000000c426000f1503d"
+    },
+    "expect": {
+      "stack": ["0x1"]
+    }
+  },
+  {
+    "name": "RETURNDATACOPY",
+    "state": {
+      "0x1000000000000000000000000000000000000c42": {
+        "code": {
+          "asm": "PUSH1 0x42\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nRETURN",
+          "bin": "60426000526001601ff3"
+        }
+      }
+    },
+    "code": {
+      "asm": "PUSH1 1\nPUSH1 31\nPUSH1 0\nPUSH1 0\nPUSH1 0\nPUSH20 0x1000000000000000000000000000000000000c42\nPUSH1 0\nCALL\nPOP\nPUSH1 1\nPUSH1 0\nPUSH1 0xff\nRETURNDATACOPY\nPUSH1 0xff\nMLOAD",
+      "bin": "6001601f600060006000731000000000000000000000000000000000000c426000f1506001600060ff3e60ff51"
+    },
+    "expect": {
+      "stack": ["0x4200000000000000000000000000000000000000000000000000000000000000"]
+    }
+  },
+  {
+    "name": "DELEGATECALL",
+    "tx": {
+      "to": "0x1000000000000000000000000000000000000aaa"
+    },
+    "state": {
+      "0xdddddddddddddddddddddddddddddddddddddddd": {
+        "code": {
+          "asm": "ADDRESS\nPUSH1 0\nSSTORE",
+          "bin": "30600055"
+        }
+      }
+    },
+    "code": {
+      "asm": "PUSH1 0\nDUP1\nDUP1\nDUP1\nPUSH20 0xdddddddddddddddddddddddddddddddddddddddd\nGAS\nDELEGATECALL\nPUSH1 0\nSLOAD",
+      "bin": "600080808073dddddddddddddddddddddddddddddddddddddddd5af4600054"
+    },
+    "expect": {
+      "stack": ["0x1000000000000000000000000000000000000aaa", "0x1"]
+    }
+  },
+  {
+    "name": "STATICCALL",
+    "state": {
+      "0x1000000000000000000000000000000000000c42": {
+        "code": {
+          "asm": "PUSH1 0x42\nPUSH1 0\nMSTORE\nPUSH1 1\nPUSH1 31\nRETURN",
+          "bin": "60426000526001601ff3"
+        }
+      }
+    },
+    "code": {
+      "asm": "PUSH1 1\nPUSH1 31\nPUSH1 0\nPUSH1 0\nPUSH20 0x1000000000000000000000000000000000000c42\nPUSH1 0\nSTATICCALL\nPUSH1 0\nMLOAD",
+      "bin": "6001601f60006000731000000000000000000000000000000000000c426000fa600051"
+    },
+    "expect": {
+      "stack": ["0x42", "0x1"]
+    }
+  },
+  {
+    "name": "STATICCALL (reverts on write)",
+    "state": {
+      "0x1000000000000000000000000000000000000c42": {
+        "code": {
+          "asm": "PUSH1 0x42\nPUSH1 0\nSSTORE",
+          "bin": "6042600055"
+        }
+      }
+    },
+    "code": {
+      "asm": "PUSH1 1\nPUSH1 31\nPUSH1 0\nPUSH1 0\nPUSH20 0x1000000000000000000000000000000000000c42\nPUSH1 0\nSTATICCALL",
+      "bin": "6001601f60006000731000000000000000000000000000000000000c426000fa"
+    },
+    "expect": {
+      "stack": ["0x0"]
     }
   },
   {
@@ -1106,7 +1337,7 @@
       "bin": "600060006009f031"
     },
     "expect": {
-      "stack": ["9"]
+      "stack": ["0x9"]
     }
   },
   {
@@ -1120,6 +1351,38 @@
     },
     "expect": {
       "stack": ["0xffffffff00000000000000000000000000000000000000000000000000000000"]
+    }
+  },
+  {
+    "name": "CREATE (reverts)",
+    "tx": {
+      "to": "0x9bbfed6889322e016e0a02ee459d306fc19545d8"
+    },
+    "code": {
+      "asm": "PUSH13 0x63FFFFFFFF6000526004601CFD\nPUSH1 0\nMSTORE\nPUSH1 13\nPUSH1 19\nPUSH1 0\nCREATE",
+      "bin": "6c63ffffffff6000526004601cfd600052600d60136000f0"
+    },
+    "expect": {
+      "stack": ["0x0"]
+    }
+  },
+  {
+    "name": "SELFDESTRUCT",
+    "state": {
+      "0xdead00000000000000000000000000000000dead": {
+        "balance": "0x7",
+        "code": {
+          "asm": "PUSH20 0xa1c300000000000000000000000000000000a1c3\nSELFDESTRUCT",
+          "bin": "73a1c300000000000000000000000000000000a1c3ff"
+        }
+      }
+    },
+    "code": {
+      "asm": "PUSH1 0\nDUP1\nDUP1\nDUP1\nDUP1\nPUSH20 0xdead00000000000000000000000000000000dead\nGAS\nCALL\nPOP\nPUSH20 0xa1c300000000000000000000000000000000a1c3\nBALANCE\nPUSH20 0xdead00000000000000000000000000000000dead\nEXTCODESIZE",
+      "bin": "60008080808073dead00000000000000000000000000000000dead5af15073a1c300000000000000000000000000000000a1c33173dead00000000000000000000000000000000dead3b"
+    },
+    "expect": {
+      "stack": ["0x0", "0x7"]
     }
   }
 ]
