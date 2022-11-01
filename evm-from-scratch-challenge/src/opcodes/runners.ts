@@ -416,6 +416,22 @@ function SWAP(ms: MachineState) {
   ms.stack.swap(pos)
 }
 
+// 0xa0 - 0xa4
+function LOG(ms: MachineState) {
+  const n = ms.code[ms.pc] - 0xa0
+  const [memOffset, size] = ms.stack.popN(2)
+  const topics = ms.stack.popN(n)
+
+  const data = ms.memory.read(Number(memOffset), Number(size))
+  const topicsHex = topics.map(parsers.BigintIntoHexString)
+
+  ms.logs.push({
+    address: ms.txData.to,
+    data: data.toString("hex"),
+    topics: topicsHex,
+  })
+}
+
 // 0xf3
 function RETURN(ms: MachineState) {
   const [offset, size] = ms.stack.popN(2)
@@ -504,6 +520,7 @@ const runners: Runners = {
   ...buildOpcodeRangeObjects(0x60, 0x7f, "PUSH", PUSH),
   ...buildOpcodeRangeObjects(0x80, 0x8f, "DUP", DUP),
   ...buildOpcodeRangeObjects(0x90, 0x9f, "SWAP", SWAP),
+  ...buildOpcodeRangeObjects(0xa0, 0xa4, "LOG", LOG),
 
   0xf3: { name: "RETURN", runner: RETURN },
 

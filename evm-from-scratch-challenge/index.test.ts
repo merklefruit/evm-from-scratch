@@ -26,5 +26,7 @@ for (const t of tests as Test[]) {
 
     if (typeof t.expect.return !== "undefined")
       expect(result.return).toEqual(t.expect.return)
+
+    if (typeof t.expect.logs !== "undefined") expect(result.logs).toEqual(t.expect.logs)
   })
 }

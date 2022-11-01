@@ -13,6 +13,7 @@ interface TestOutput {
   success: boolean
   stack: string[]
   return: string
+  logs: Log[]
 }
 
 export interface Test {
@@ -53,4 +54,10 @@ export interface Block {
   difficulty: bigint
   gaslimit: string
   chainid: number
+}
+
+export interface Log {
+  address: Address
+  topics: string[]
+  data: string
 }

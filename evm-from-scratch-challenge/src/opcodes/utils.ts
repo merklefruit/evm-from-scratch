@@ -35,6 +35,9 @@ export const parsers = {
       (hexString?.match(/../g) || []).map((byte) => parseInt(byte, 16))
     )
   },
+  BufferToHexString(buffer: Buffer): string {
+    return "0x" + buffer.toString("hex")
+  },
 }
 
 // https://stackoverflow.com/questions/51867270

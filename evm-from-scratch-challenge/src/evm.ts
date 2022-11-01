@@ -44,6 +44,7 @@ export default class EVM {
       txData: _txData,
       block: _block,
       code: _code,
+      logs: [],
       pc: 0,
     }
   }
@@ -68,6 +69,7 @@ export default class EVM {
       success,
       stack: this._ms.stack.dump,
       return: this._ms.returnData.toString("hex"),
+      logs: this._ms.logs,
     }
 
     return result
