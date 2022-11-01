@@ -295,7 +295,6 @@ function DIFFICULTY(ms: MachineState) {
 // 0x45
 function GASLIMIT(ms: MachineState) {
   const res = ms.block.gaslimit
-  console.log(res)
   ms.stack.push(parsers.HexStringIntoBigInt(res))
 }
 

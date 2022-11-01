@@ -1,6 +1,6 @@
 import { expect, test } from "@jest/globals"
 
-import evm from "."
+import EVM from "./src/evm"
 import tests from "./evm.json"
 import { parsers } from "./src/opcodes/utils"
 import { buildBlock, buildState, buildTxData } from "./src/utils"
@@ -9,12 +9,17 @@ import type { Test } from "./src/types"
 
 for (const t of tests as Test[]) {
   test(t.name, async () => {
-    const code = parsers.hexStringToUint8Array(t.code.bin)
-    const txData = buildTxData(t)
-    const state = buildState(t)
-    const block = buildBlock(t)
+    const evm = new EVM({
+      debug: true,
+      saveLogs: false,
+      _code: parsers.hexStringToUint8Array(t.code.bin),
+      _asm: t.code.asm,
+      _txData: buildTxData(t),
+      _globalState: buildState(t),
+      _block: buildBlock(t),
+    })
 
-    const result = await evm(code, txData, state, block)
+    const result = await evm.run()
 
     if (typeof t.expect.stack !== "undefined")
       expect(result.stack).toEqual(

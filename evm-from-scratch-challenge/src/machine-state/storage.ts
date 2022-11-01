@@ -40,9 +40,6 @@ export default class Storage {
     if (oldStorageValue?.equals(value)) return
 
     // todo: implement logger & persistent changes log
-    console.log("storage value changed")
-    console.log("old value:", oldStorageValue)
-    console.log("new value:", value)
 
     this._storage.get(address)!.set(key, value)
   }
@@ -53,5 +50,9 @@ export default class Storage {
 
   public setAsBigInt(address: Address, key: string, value: bigint): void {
     this.set(address, key, Buffer.from(value.toString(16).padStart(64, "0"), "hex"))
+  }
+
+  get dump(): string {
+    return JSON.stringify(this._storage, null, 2)
   }
 }

@@ -14,6 +14,9 @@ enum ERRORS {
 
   STOP = "STOP",
   REVERT = "REVERT",
+
+  NO_CODE_PROVIDED = "no code provided",
+  OPCODE_NOT_IMPLEMENTED = "opcode not implemented",
 }
 
 export default ERRORS

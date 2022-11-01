@@ -1,14 +1,16 @@
+import { buildBlock, buildState, buildTxData } from "./utils"
 import { MAX_256_BITS } from "./constants"
 import runners from "./opcodes/runners"
 import ERRORS from "./errors"
 
 import GlobalState from "./globalState"
+import Logger from "./logger"
 
 import Stack from "./machine-state/stack"
 import Memory from "./machine-state/memory"
 import Storage from "./machine-state/storage"
 
-import type { Address, Block, State, TxData } from "./types"
+import type { Address, EvmParams } from "./types"
 import type { MachineState } from "./machine-state/types"
 
 // Main EVM class. Brainstorming notes:
@@ -26,24 +28,37 @@ export default class EVM {
   private _origin: Address
   private _gasPrice: bigint
   private _gasLimit: bigint
-
   private _ms: MachineState
 
-  constructor(_code: Uint8Array, _txData: TxData, _globalState: State, _block: Block) {
-    this._origin = _txData.origin
+  public logger: Logger
+  public readonly debug: boolean
+  public readonly saveLogs: boolean
+
+  constructor(params: Partial<EvmParams>) {
+    if (!params._code) throw new Error(ERRORS.NO_CODE_PROVIDED)
+
+    // build default state objects if not provided in params
+    if (!params._globalState) params._globalState = buildState()
+    if (!params._txData) params._txData = buildTxData()
+    if (!params._block) params._block = buildBlock()
+
+    this.debug = params.debug ?? false
+    this.saveLogs = params.saveLogs ?? false
+    this.logger = new Logger(params._code, params._asm)
+    this._origin = params._txData?.origin
     this._gasPrice = 0n
     this._gasLimit = 0n
 
     this._ms = {
-      globalState: new GlobalState(_globalState),
+      globalState: new GlobalState(params._globalState),
       storage: new Storage(),
       memory: new Memory(),
       stack: new Stack(),
       returnData: Buffer.alloc(0),
       gasAvailable: MAX_256_BITS - 1n, // todo
-      txData: _txData,
-      block: _block,
-      code: _code,
+      txData: params._txData,
+      block: params._block,
+      code: params._code,
       logs: [],
       pc: 0,
     }
@@ -51,25 +66,28 @@ export default class EVM {
 
   public async run() {
     let success = false
-
-    console.log("starting execution")
+    let logsFile = ""
 
     // execute opcodes sequentially
     while (this._ms.pc < this._ms.code.length) {
       try {
         await this.execute(this.currentOpcode)
       } catch (err: any) {
-        console.log("Encountered runtime error:", err.message)
+        this.logger.error(err)
         if (err.message === ERRORS.STOP) success = true
         break
       }
     }
+
+    if (this.debug) console.log(this.logger.output)
+    if (this.saveLogs) logsFile = this.logger.saveToFile()
 
     const result = {
       success,
       stack: this._ms.stack.dump,
       return: this._ms.returnData.toString("hex"),
       logs: this._ms.logs,
+      logsFile,
     }
 
     return result
@@ -77,17 +95,11 @@ export default class EVM {
 
   // Execute a single opcode and update the machine state
   private async execute(opcode: number): Promise<void> {
-    console.log(`executing 0x${opcode.toString(16)}: ${runners[opcode]?.name}`)
-
     const runner = runners[opcode]?.runner
-    if (!runner) throw new Error(`Opcode 0x${opcode.toString(16)} not implemented`)
+    if (!runner) throw new Error(ERRORS.OPCODE_NOT_IMPLEMENTED)
 
-    // execute the opcode
-    console.log("stack before", this._ms.stack.dump)
-    console.log("memory before", this._ms.memory.dump)
+    this.logger.step(this._ms)
     await runner(this._ms)
-    console.log("stack after", this._ms.stack.dump)
-    console.log("memory after", this._ms.memory.dump)
 
     this._ms.pc++
   }
