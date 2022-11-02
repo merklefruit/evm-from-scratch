@@ -5,21 +5,21 @@ import tests from "./evm.json"
 import { parsers } from "./src/opcodes/utils"
 import { buildBlock, buildState, buildTxData } from "./src/utils"
 
-import type { Test } from "./src/types"
+import type { EvmRuntimeParams, Test } from "./src/types"
 
 for (const t of tests as Test[]) {
   test(t.name, async () => {
-    const evm = new EVM({
-      debug: true,
-      saveLogs: false,
+    const evm = new EVM({ debug: true, saveLogs: false })
+
+    const EvmRuntimeParams: EvmRuntimeParams = {
       _code: parsers.hexStringToUint8Array(t.code.bin),
       _asm: t.code.asm,
       _txData: buildTxData(t),
       _globalState: buildState(t),
       _block: buildBlock(t),
-    })
+    }
 
-    const result = await evm.run()
+    const result = await evm.start(EvmRuntimeParams)
 
     if (typeof t.expect.stack !== "undefined")
       expect(result.stack).toEqual(

@@ -2,6 +2,12 @@ import { MAX_256_BITS } from "../constants"
 
 import type { OpcodeRunner, Runners } from "./types"
 
+// enums don't support bigints
+export const CALL_RESULT = {
+  REVERT: 0n,
+  SUCCESS: 1n,
+}
+
 export function buildOpcodeRangeObjects(
   start: number,
   end: number,

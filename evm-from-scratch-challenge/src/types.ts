@@ -4,12 +4,12 @@ export type Address = string
 export type ProgramCounter = number
 export type Calldata = Buffer
 
-interface LogOptions {
+export interface EVMOpts {
   debug?: boolean
   saveLogs?: boolean
 }
 
-export interface EvmParams extends LogOptions {
+export interface EvmRuntimeParams {
   _code: Uint8Array
   _asm: string
   _txData: TxData

@@ -10,31 +10,24 @@ import Stack from "./machine-state/stack"
 import Memory from "./machine-state/memory"
 import Storage from "./machine-state/storage"
 
-import type { Address, EvmParams } from "./types"
+import type { EVMOpts, EvmRuntimeParams } from "./types"
 import type { MachineState } from "./machine-state/types"
-
-// Main EVM class. Brainstorming notes:
-// For each transaction, the EVM can take as input:
-// - the transaction input data (if message call) or the init code (if contract creation)
-// - the world state involved with the transaction, such as the account code and storage
-// - the transaction context, such as the caller, gas price, and gas limit
-// - the block context, such as the block number, timestamp, and gas limit
-// - the transaction execution context, such as the transaction nonce, gas price, and gas limit
-//
-// Then, it can sequentially execute according to the instructions specified
-// and return the updated world state and the transaction output data.
+import { CallOrCreateRunner, SimpleRunner } from "./opcodes/types"
 
 export default class EVM {
-  private _origin: Address
-  private _gasPrice: bigint
-  private _gasLimit: bigint
-  private _ms: MachineState
+  private readonly debug: boolean
+  private readonly saveLogs: boolean
+  private readonly logger: Logger
+  private _depth: number
 
-  public logger: Logger
-  public readonly debug: boolean
-  public readonly saveLogs: boolean
+  constructor(options: EVMOpts) {
+    this.debug = options.debug ?? false
+    this.saveLogs = options.saveLogs ?? false
+    this.logger = new Logger()
+    this._depth = 0
+  }
 
-  constructor(params: Partial<EvmParams>) {
+  public async start(params: Partial<EvmRuntimeParams>) {
     if (!params._code) throw new Error(ERRORS.NO_CODE_PROVIDED)
 
     // build default state objects if not provided in params
@@ -42,14 +35,7 @@ export default class EVM {
     if (!params._txData) params._txData = buildTxData()
     if (!params._block) params._block = buildBlock()
 
-    this.debug = params.debug ?? false
-    this.saveLogs = params.saveLogs ?? false
-    this.logger = new Logger(params._code, params._asm)
-    this._origin = params._txData?.origin
-    this._gasPrice = 0n
-    this._gasLimit = 0n
-
-    this._ms = {
+    const ms: MachineState = {
       globalState: new GlobalState(params._globalState),
       storage: new Storage(),
       memory: new Memory(),
@@ -62,51 +48,65 @@ export default class EVM {
       logs: [],
       pc: 0,
     }
+
+    this.logger.start(params._code, params._asm)
+
+    return await this.run(ms)
   }
 
-  public async run() {
+  public async run(ms: MachineState, isSubCall = false) {
     let success = false
-    let logsFile = ""
+
+    if (isSubCall) {
+      this.logger.notify("Starting subcall.")
+      this._depth++
+    }
 
     // execute opcodes sequentially
-    while (this._ms.pc < this._ms.code.length) {
+    while (ms.pc < ms.code.length) {
       try {
-        await this.execute(this.currentOpcode)
+        this.logger.step(ms)
+
+        await this.execute(ms)
       } catch (err: any) {
         this.logger.error(err)
-        if (err.message === ERRORS.STOP) success = true
+
+        if (err.message === ERRORS.STOP) {
+          success = true
+
+          if (isSubCall) {
+            this.logger.notify("Subcall completed.")
+            this._depth--
+          }
+        }
+
         break
       }
     }
 
     if (this.debug) console.log(this.logger.output)
-    if (this.saveLogs) logsFile = this.logger.saveToFile()
+    if (this.saveLogs) this.logger.saveToFile()
 
     const result = {
       success,
-      stack: this._ms.stack.dump,
-      return: this._ms.returnData.toString("hex"),
-      logs: this._ms.logs,
-      logsFile,
+      stack: ms.stack.dump,
+      return: ms.returnData.toString("hex"),
+      logs: ms.logs,
     }
 
     return result
   }
 
   // Execute a single opcode and update the machine state
-  private async execute(opcode: number): Promise<void> {
+  private async execute(ms: MachineState): Promise<void> {
+    const opcode = ms.code[ms.pc]
     const runner = runners[opcode]?.runner
     if (!runner) throw new Error(ERRORS.OPCODE_NOT_IMPLEMENTED)
 
-    this.logger.step(this._ms)
-    await runner(this._ms)
+    // Handle special cases for CALL and CREATE
+    if (opcode === 0xf1) await (runner as CallOrCreateRunner)(ms, this)
+    else await (runner as SimpleRunner)(ms)
 
-    this._ms.pc++
-  }
-
-  get currentOpcode(): number {
-    if (this._ms.pc >= this._ms.code.length) throw new Error(ERRORS.PC_OUT_OF_BOUNDS)
-
-    return this._ms.code[this._ms.pc]
+    ms.pc++
   }
 }

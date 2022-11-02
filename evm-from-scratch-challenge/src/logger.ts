@@ -9,11 +9,13 @@ export default class Logger {
   private _output: string[]
   private _steps: number
 
-  constructor(bin: Uint8Array, asm?: string) {
+  constructor() {
     this._steps = 0
     this._output = []
+  }
 
-    this._output.push(`New execution initialized.`)
+  start(bin: Uint8Array, asm?: string) {
+    this._output.push(`******************** Starting Execution ********************`)
     this._output.push(``)
     this._output.push(`Execution Bytecode:`)
     this._output.push(`${Buffer.from(bin).toString("hex")}`)
@@ -55,6 +57,14 @@ export default class Logger {
     this._output.push(`******************** ERROR ********************`)
     this._output.push(``)
     this._output.push(`Runtime Error encountered: ${err}`)
+    this._output.push(``)
+  }
+
+  notify(message: string) {
+    this._output.push(`******************** NOTIFICATION ********************`)
+    this._output.push(``)
+    this._output.push(`${message}`)
+    this._output.push(``)
   }
 
   get output() {

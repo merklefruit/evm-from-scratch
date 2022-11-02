@@ -1,9 +1,11 @@
 import { keccak256 } from "ethereum-cryptography/keccak"
-import { buildOpcodeRangeObjects, bigMath, parsers } from "./utils"
+import { buildOpcodeRangeObjects, bigMath, parsers, CALL_RESULT } from "./utils"
 import ERRORS from "../errors"
 
-import type { MachineState } from "../machine-state/types"
+import type EVM from "../evm"
 import type { Runners } from "./types"
+import type { MachineState } from "../machine-state/types"
+import { freshExecutionContext } from "../machine-state/utils"
 
 // 0x00
 function STOP() {
@@ -431,6 +433,36 @@ function LOG(ms: MachineState) {
   })
 }
 
+// 0xf1
+async function CALL(ms: MachineState, evm: EVM) {
+  const [gas, address, value, argsOffset, argsSize, retOffset, retSize] = ms.stack.popN(7)
+  const data = ms.memory.read(Number(argsOffset), Number(argsSize))
+  const to = parsers.BigintIntoHexString(address)
+
+  const codeToCall = ms.globalState.getAccount(to).code
+  if (!codeToCall) return ms.stack.push(CALL_RESULT.SUCCESS)
+
+  const callMachineState: MachineState = {
+    ...ms,
+    pc: 0,
+    // ...freshExecutionContext(),
+    gasAvailable: gas,
+    txData: { ...ms.txData, to, value, data },
+    code: codeToCall,
+  }
+
+  const callResult = await evm.run(callMachineState, true)
+  console.log(callResult.return)
+
+  if (callResult.return) {
+    ms.returnData = Buffer.from(callResult.return)
+    ms.memory.write(Number(retOffset), Buffer.from(callResult.return), Number(retSize))
+  }
+
+  if (callResult.success) ms.stack.push(CALL_RESULT.SUCCESS)
+  else ms.stack.push(CALL_RESULT.REVERT)
+}
+
 // 0xf3
 function RETURN(ms: MachineState) {
   const [offset, size] = ms.stack.popN(2)
@@ -521,6 +553,7 @@ const runners: Runners = {
   ...buildOpcodeRangeObjects(0x90, 0x9f, "SWAP", SWAP),
   ...buildOpcodeRangeObjects(0xa0, 0xa4, "LOG", LOG),
 
+  0xf1: { name: "CALL", runner: CALL },
   0xf3: { name: "RETURN", runner: RETURN },
 
   0xfd: { name: "REVERT", runner: REVERT },

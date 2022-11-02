@@ -27,10 +27,11 @@ async function main() {
     const evm = new EVM({
       debug: argv.debug,
       saveLogs: argv.saveLogs,
-      _code: parsers.hexStringToUint8Array(argv.bytecode),
     })
 
-    const result = await evm.run()
+    const result = await evm.start({
+      _code: parsers.hexStringToUint8Array(argv.bytecode),
+    })
 
     console.log("Execution complete")
     console.log("Result:\n", result)
@@ -54,17 +55,13 @@ async function main() {
     const evm = new EVM({
       debug: argv.debug,
       saveLogs: argv.saveLogs,
-      _code,
-      _asm,
-      _txData,
-      _globalState,
-      _block,
     })
 
-    const result = await evm.run()
+    const result = await evm.start({ _code, _asm, _txData, _globalState, _block })
 
     console.log("Execution complete")
-    if (argv.saveLogs) console.log("Logs saved to:", result.logsFile)
+    if (argv.saveLogs) console.log("Logs saved to file.")
+
     console.log("Result:\n", result)
   }
 }
