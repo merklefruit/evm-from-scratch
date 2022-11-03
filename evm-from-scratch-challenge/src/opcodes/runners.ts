@@ -274,7 +274,17 @@ function RETURNDATASIZE(ms: MachineState) {
   ms.stack.push(res)
 }
 
-// todo: 0x3e 0x3f 0x40
+// 0x3e
+function RETURNDATACOPY(ms: MachineState) {
+  const memOffset = Number(ms.stack.pop())
+  const returnDataOffset = Number(ms.stack.pop())
+  const size = Number(ms.stack.pop())
+
+  const returnData = ms.returnData.subarray(returnDataOffset, returnDataOffset + size)
+  ms.memory.write(memOffset, returnData, size)
+}
+
+// todo: 0x3f 0x40
 
 // 0x41
 function COINBASE(ms: MachineState) {
@@ -537,6 +547,7 @@ const runners: Runners = {
   0x3b: { name: "EXTCODESIZE", runner: EXTCODESIZE },
   0x3c: { name: "EXTCODECOPY", runner: EXTCODECOPY },
   0x3d: { name: "RETURNDATASIZE", runner: RETURNDATASIZE },
+  0x3e: { name: "RETURNDATACOPY", runner: RETURNDATACOPY },
 
   0x41: { name: "COINBASE", runner: COINBASE },
   0x42: { name: "TIMESTAMP", runner: TIMESTAMP },
