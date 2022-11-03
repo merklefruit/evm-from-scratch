@@ -32,3 +32,4 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 13](./daily-progress/day13.md): Simple Storage implementation, SSTORE, SLOAD, RETURN, REVERT Opcodes
 - [x] [Day 14](./daily-progress/day14.md): Upgraded test file & refactored code, added GAS, LOG Opcodes
 - [x] [Day 15](./daily-progress/day15.md): Major EVM class refactoring & started CALL Opcode
+- [x] [Day 16](./daily-progress/day16.md): Final CALL implementation & RETURNDATASIZE, RETURNDATACOPY Opcodes
