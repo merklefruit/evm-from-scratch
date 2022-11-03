@@ -268,7 +268,13 @@ function EXTCODECOPY(ms: MachineState) {
   ms.memory.write(memOffset, code, size)
 }
 
-// todo: 0x3d 0x3e 0x3f 0x40
+// 0x3d
+function RETURNDATASIZE(ms: MachineState) {
+  const res = BigInt(ms.returnData.length)
+  ms.stack.push(res)
+}
+
+// todo: 0x3e 0x3f 0x40
 
 // 0x41
 function COINBASE(ms: MachineState) {
@@ -436,10 +442,11 @@ function LOG(ms: MachineState) {
 // 0xf1
 async function CALL(ms: MachineState, evm: EVM) {
   const [gas, address, value, argsOffset, argsSize, retOffset, retSize] = ms.stack.popN(7)
+
   const data = ms.memory.read(Number(argsOffset), Number(argsSize))
   const to = parsers.BigintIntoHexString(address)
-
   const codeToCall = ms.globalState.getAccount(to).code
+
   if (!codeToCall) return ms.stack.push(CALL_RESULT.SUCCESS)
 
   const callMachineState: MachineState = {
@@ -453,16 +460,14 @@ async function CALL(ms: MachineState, evm: EVM) {
   const callResult = await evm.run(callMachineState, true)
 
   if (callResult.return) {
-    ms.returnData = Buffer.from(callResult.return, "hex")
-    console.log("attempting to write return data to memory")
-    console.log("call result", callResult.return)
-    console.log("buffer from call result", Buffer.from(callResult.return, "hex"))
+    const callReturnData = Buffer.from(callResult.return, "hex")
+    const callReturnOffset = Number(retOffset)
+    const callReturnSize = Number(retSize)
 
-    ms.memory.write(
-      Number(retOffset),
-      Buffer.from(callResult.return, "hex"),
-      Number(retSize)
-    )
+    ms.returnData = callReturnData
+
+    if (callReturnSize > 0)
+      ms.memory.write(callReturnOffset, callReturnData, callReturnSize)
   }
 
   if (callResult.success) ms.stack.push(CALL_RESULT.SUCCESS)
@@ -531,6 +536,7 @@ const runners: Runners = {
   0x3a: { name: "GASPRICE", runner: GASPRICE },
   0x3b: { name: "EXTCODESIZE", runner: EXTCODESIZE },
   0x3c: { name: "EXTCODECOPY", runner: EXTCODECOPY },
+  0x3d: { name: "RETURNDATASIZE", runner: RETURNDATASIZE },
 
   0x41: { name: "COINBASE", runner: COINBASE },
   0x42: { name: "TIMESTAMP", runner: TIMESTAMP },
