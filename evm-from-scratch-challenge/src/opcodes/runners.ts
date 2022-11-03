@@ -444,19 +444,25 @@ async function CALL(ms: MachineState, evm: EVM) {
 
   const callMachineState: MachineState = {
     ...ms,
-    pc: 0,
-    // ...freshExecutionContext(),
+    ...freshExecutionContext(),
     gasAvailable: gas,
-    txData: { ...ms.txData, to, value, data },
+    txData: { ...ms.txData, from: ms.txData.to, to, value, data },
     code: codeToCall,
   }
 
   const callResult = await evm.run(callMachineState, true)
-  console.log(callResult.return)
 
   if (callResult.return) {
-    ms.returnData = Buffer.from(callResult.return)
-    ms.memory.write(Number(retOffset), Buffer.from(callResult.return), Number(retSize))
+    ms.returnData = Buffer.from(callResult.return, "hex")
+    console.log("attempting to write return data to memory")
+    console.log("call result", callResult.return)
+    console.log("buffer from call result", Buffer.from(callResult.return, "hex"))
+
+    ms.memory.write(
+      Number(retOffset),
+      Buffer.from(callResult.return, "hex"),
+      Number(retSize)
+    )
   }
 
   if (callResult.success) ms.stack.push(CALL_RESULT.SUCCESS)
