@@ -33,3 +33,4 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 14](./daily-progress/day14.md): Upgraded test file & refactored code, added GAS, LOG Opcodes
 - [x] [Day 15](./daily-progress/day15.md): Major EVM class refactoring & started CALL Opcode
 - [x] [Day 16](./daily-progress/day16.md): Final CALL implementation & RETURNDATASIZE, RETURNDATACOPY Opcodes
+- [x] [Day 17](./daily-progress/day17.md): Opcode runners refactoring, DELEGATECALL, STATICCALL Opcodes
