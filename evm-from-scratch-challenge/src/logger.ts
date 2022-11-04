@@ -4,6 +4,7 @@ import path from "path"
 import runners from "./opcodes/runners"
 
 import type { MachineState } from "./machine-state/types"
+import { parsers } from "./opcodes/utils"
 
 export default class Logger {
   private _output: string[]
@@ -37,7 +38,7 @@ export default class Logger {
     this._output.push(`Program Counter: ${ms.pc}`)
     this._output.push(``)
     this._output.push(`Stack:`)
-    this._output.push(`${ms.stack.dump || "Empty"}`)
+    this._output.push(`${ms.stack.dump.map(parsers.BigintIntoHexString).join("\n")}`)
     this._output.push(``)
     this._output.push(`Memory:`)
     this._output.push(`${ms.memory.dump || "Empty"}`)

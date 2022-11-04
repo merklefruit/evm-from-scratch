@@ -1,3 +1,3 @@
 export const MAX_256_BITS = 2n ** 256n
-
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000"
+export const CALL_OR_CREATE = [0xf1, 0xf2, 0xf4, 0xf5, 0xfa]

@@ -47,9 +47,8 @@ export default class Memory {
 
   get dump(): string {
     let dump = ""
-    for (let i = 0; i < this._memory.length; i += 32) {
+    for (let i = 0; i < this._memory.length; i += 32)
       dump += this._memory.subarray(i, i + 32).toString("hex") + "\n"
-    }
 
     return dump
   }

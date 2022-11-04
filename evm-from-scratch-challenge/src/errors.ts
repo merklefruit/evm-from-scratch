@@ -17,6 +17,7 @@ enum ERRORS {
 
   NO_CODE_PROVIDED = "no code provided",
   OPCODE_NOT_IMPLEMENTED = "opcode not implemented",
+  INVALID_CALL_DEPTH = "invalid call depth",
 }
 
 export default ERRORS

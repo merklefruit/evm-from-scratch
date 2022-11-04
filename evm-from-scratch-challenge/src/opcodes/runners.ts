@@ -88,6 +88,7 @@ const runners: Runners = {
 
   0xf1: { name: "CALL", runner: system.CALL },
   0xf3: { name: "RETURN", runner: system.RETURN },
+  0xf4: { name: "DELEGATECALL", runner: system.DELEGATECALL },
 
   0xfd: { name: "REVERT", runner: system.REVERT },
 }

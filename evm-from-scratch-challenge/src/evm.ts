@@ -1,5 +1,5 @@
 import { buildBlock, buildState, buildTxData } from "./utils"
-import { MAX_256_BITS } from "./constants"
+import { CALL_OR_CREATE, MAX_256_BITS } from "./constants"
 import runners from "./opcodes/runners"
 import ERRORS from "./errors"
 
@@ -56,6 +56,7 @@ export default class EVM {
 
   public async run(ms: MachineState, isSubCall = false) {
     let success = false
+    let reverted = false
 
     if (isSubCall) {
       this.logger.notify("Starting subcall.")
@@ -71,16 +72,20 @@ export default class EVM {
       } catch (err: any) {
         this.logger.error(err)
 
-        if (err.message === ERRORS.STOP) {
-          success = true
-
-          if (isSubCall) {
-            this.logger.notify("Subcall completed.")
-            this._depth--
-          }
-        }
+        if (err.message === ERRORS.REVERT) reverted = true
+        if (err.message === ERRORS.STOP) success = true
 
         break
+      }
+    }
+
+    if (isSubCall) {
+      if (this._depth === 0) throw new Error(ERRORS.INVALID_CALL_DEPTH)
+      this._depth--
+
+      if (!reverted) {
+        this.logger.notify("Subcall completed without REVERT")
+        success = true
       }
     }
 
@@ -103,8 +108,8 @@ export default class EVM {
     const runner = runners[opcode]?.runner
     if (!runner) throw new Error(ERRORS.OPCODE_NOT_IMPLEMENTED)
 
-    // Handle special cases for CALL and CREATE
-    if (opcode === 0xf1) await (runner as CallOrCreateRunner)(ms, this)
+    // Handle special cases for CALL and CREATE instructions
+    if (CALL_OR_CREATE.includes(opcode)) await (runner as CallOrCreateRunner)(ms, this)
     else await (runner as SimpleRunner)(ms)
 
     ms.pc++

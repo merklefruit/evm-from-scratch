@@ -50,6 +50,45 @@ export function RETURN(ms: MachineState) {
   throw new Error(ERRORS.STOP)
 }
 
+// 0xf4
+export async function DELEGATECALL(ms: MachineState, evm: EVM) {
+  const [gas, address, argsOffset, argsSize, retOffset, retSize] = ms.stack.popN(6)
+
+  const data = ms.memory.read(Number(argsOffset), Number(argsSize))
+  const to = parsers.BigintIntoHexString(address)
+  const codeToCall = ms.globalState.getAccount(to).code
+
+  if (!codeToCall) return ms.stack.push(CALL_RESULT.SUCCESS)
+
+  const callMachineState: MachineState = {
+    ...ms,
+    ...freshExecutionContext(),
+    gasAvailable: gas,
+
+    // The caller and value are the same as the current context
+    txData: { ...ms.txData, data },
+    code: codeToCall,
+  }
+
+  const callResult = await evm.run(callMachineState, true)
+
+  console.log(callResult)
+
+  if (callResult.return) {
+    const callReturnData = Buffer.from(callResult.return, "hex")
+    const callReturnOffset = Number(retOffset)
+    const callReturnSize = Number(retSize)
+
+    ms.returnData = callReturnData
+
+    if (callReturnSize > 0)
+      ms.memory.write(callReturnOffset, callReturnData, callReturnSize)
+  }
+
+  if (callResult.success) ms.stack.push(CALL_RESULT.SUCCESS)
+  else ms.stack.push(CALL_RESULT.REVERT)
+}
+
 // 0xfd
 export function REVERT(ms: MachineState) {
   const [offset, size] = ms.stack.popN(2)
