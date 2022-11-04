@@ -18,6 +18,10 @@ enum ERRORS {
   NO_CODE_PROVIDED = "no code provided",
   OPCODE_NOT_IMPLEMENTED = "opcode not implemented",
   INVALID_CALL_DEPTH = "invalid call depth",
+
+  STATIC_DISALLOWED = "static disallowed",
+  STATIC_DISALLOWED_OPCODE = "static disallowed opcode",
+  STATIC_DISALLOWED_CALL_VALUE = "static disallowed call value",
 }
 
 export default ERRORS

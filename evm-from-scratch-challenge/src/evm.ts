@@ -1,5 +1,5 @@
 import { buildBlock, buildState, buildTxData } from "./utils"
-import { CALL_OR_CREATE, MAX_256_BITS } from "./constants"
+import { CALL, CALL_OR_CREATE, MAX_256_BITS, STATIC_DISALLOWED } from "./constants"
 import runners from "./opcodes/runners"
 import ERRORS from "./errors"
 
@@ -45,6 +45,7 @@ export default class EVM {
       txData: params._txData,
       block: params._block,
       code: params._code,
+      static: false,
       logs: [],
       pc: 0,
     }
@@ -59,14 +60,21 @@ export default class EVM {
     let reverted = false
 
     if (isSubCall) {
-      this.logger.notify("Starting subcall.")
       this._depth++
+      this.logger.notify(`Starting subcall. Depth: ${this._depth}`)
     }
 
     // execute opcodes sequentially
     while (ms.pc < ms.code.length) {
       try {
         this.logger.step(ms)
+        const opcode = ms.code[ms.pc]
+
+        if (ms.static) {
+          // throw if opcode is not allowed in static context
+          if (STATIC_DISALLOWED.includes(opcode)) throw new Error(ERRORS.REVERT)
+          if (opcode === CALL && ms.txData.value !== 0n) throw new Error(ERRORS.REVERT)
+        }
 
         await this.execute(ms)
       } catch (err: any) {
@@ -84,7 +92,7 @@ export default class EVM {
       this._depth--
 
       if (!reverted) {
-        this.logger.notify("Subcall completed without REVERT")
+        this.logger.notify(`Subcall completed without REVERT. Depth: ${this._depth}`)
         success = true
       }
     }

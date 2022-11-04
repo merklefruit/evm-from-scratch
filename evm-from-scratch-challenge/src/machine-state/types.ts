@@ -28,6 +28,7 @@ import type { Block, Gas, Log, ProgramCounter, TxData } from "../types"
 // - block: the block data of the current execution context
 // - returnData: the return data of the current execution context
 // - logs: the logs output by the LOG operations
+// - static: a flag that indicates whether the current execution context is static or not
 
 export interface MachineState {
   gasAvailable: Gas
@@ -42,4 +43,6 @@ export interface MachineState {
   block: Block
   returnData: Buffer
   logs: Log[]
+
+  static: boolean
 }
