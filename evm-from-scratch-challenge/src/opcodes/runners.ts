@@ -91,6 +91,8 @@ const runners: Runners = {
   0xfa: { name: "STATICCALL", runner: system.STATICCALL },
 
   0xfd: { name: "REVERT", runner: system.REVERT },
+
+  0xff: { name: "SELFDESTRUCT", runner: system.SELFDESTRUCT },
 }
 
 export default runners

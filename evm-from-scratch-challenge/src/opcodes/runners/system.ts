@@ -173,3 +173,23 @@ export function REVERT(ms: MachineState) {
 
   throw new Error(ERRORS.REVERT)
 }
+
+// 0xff
+export function SELFDESTRUCT(ms: MachineState) {
+  const [address] = ms.stack.popN(1)
+  const addressToPay = parsers.BigintIntoHexString(address)
+  const accountToPay = ms.globalState.getAccount(addressToPay)
+  const accountToDestroy = ms.globalState.getAccount(ms.txData.to)
+
+  if (accountToDestroy?.balance) {
+    ms.globalState.setAccount(addressToPay, {
+      ...accountToPay,
+      balance: accountToDestroy.balance + (accountToPay?.balance || 0n),
+    })
+  }
+
+  ms.globalState.setAccount(ms.txData.to, {})
+  ms.pc = ms.code.length
+
+  throw new Error(ERRORS.STOP)
+}
