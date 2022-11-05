@@ -1,20 +1,16 @@
-# 100 days of EVM
+# EVM From Scratch Challenge
 
-This is a challenge inspired by the popular `100DaysOfCode` trend, which is a challenge to build the habit of writing and studying software by doing it daily. _I want to do the same, but with the Ethereum Virtual Machine._
+> I implemented the Ethereum Virtual Machine from scratch in Typescript. The only external dependency is the `ethereum-cryptography` package used for the keccak256 hash function.
 
----
+## Introduction
 
-## Rules (very simple)
+The EVM is the core of the Ethereum protocol. It is a stack-based virtual machine that executes bytecode and updates the glogbal state according to the rules described in the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf). The EVM is responsible for executing smart contracts and is what makes Ethereum a "World Computer".
 
-- Spend 1 hour every day implementing or studying the EVM
-- The 100 days don't have to be strictly consecutive. It's on a best-effort basis.
-- Document the progress daily
+## What is this challenge about?
 
-## Roadmap
+[W1nt3r.eth](https://twitter.com/w1nt3r_eth) is the creator of the [EVM From Scratch](https://github.com/w1nt3r-eth/evm-from-scratch) challenge, which consists in a series of 116 tests that need to be passed sequentially in order to have a working EVM implementation. The challenge is a great way to learn about the EVM and how it works. I highly recommend it if you want to _really_ understand what is going on under the hood of Ethereum smart contracts.
 
-- First goal: Implement a minimal EVM in Typescript that must pass all tests of the [evm-from-scratch](https://github.com/w1nt3r-eth/evm-from-scratch) challenge.
-
-## Progress
+## Progress Log
 
 - [x] [Day 0](./daily-progress/day00.md): Research of relevant learning material & tools to get started
 - [x] [Day 1](./daily-progress/day01.md): Gathering more resources & reading Mastering Ethereum chapter 13
@@ -34,3 +30,4 @@ This is a challenge inspired by the popular `100DaysOfCode` trend, which is a ch
 - [x] [Day 15](./daily-progress/day15.md): Major EVM class refactoring & started CALL Opcode
 - [x] [Day 16](./daily-progress/day16.md): Final CALL implementation & RETURNDATASIZE, RETURNDATACOPY Opcodes
 - [x] [Day 17](./daily-progress/day17.md): Opcode runners refactoring, DELEGATECALL, STATICCALL Opcodes
+- [x] [Day 18](./daily-progress/day18.md): CREATE, SELFDESTRUCT Opcodes. EVM-from-scrtach challenge completed!

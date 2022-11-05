@@ -84,4 +84,4 @@ For `SELFDESTRUCT`, I know for sure that this implementation is very incomplete,
 
 Yeah, that was the last Opcode of the challenge! I feel like I've talked about my feedback too many times already, so I will only say here that **it was awesome and I'm grateful to Winter for putting this together**.
 
-I will be taking a small break from the 100 days challenge, only because I need a new goal to reach and it has to be something that I can do in a reasonable amount of time. There are too many options to choose from, so I have to think about it a bit more.
+I absolutely recommend undertaking this experience if you are curious about smart contracts and the Ethereum protocol in general. You will learn a ton of low-level details that will be immensely useful for your future smart contract projects. Shoutout to W1nt3r for putting this together!
