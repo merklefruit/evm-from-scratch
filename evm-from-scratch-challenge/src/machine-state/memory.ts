@@ -26,6 +26,7 @@ export default class Memory {
 
   read(offset: number, size: number): Buffer {
     if (offset < 0) throw new Error(ERRORS.INVALID_MEMORY_OFFSET)
+    if (size === 0) return Buffer.alloc(0)
 
     const overflow = Math.ceil((offset + size) / 32) * 32 - this.size
     if (!overflow) return this._memory.subarray(offset, offset + size)

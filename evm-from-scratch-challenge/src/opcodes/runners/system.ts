@@ -1,9 +1,48 @@
+import { keccak256 } from "ethereum-cryptography/keccak"
+
 import ERRORS from "../../errors"
 import { freshExecutionContext } from "../../machine-state/utils"
 import { parsers, CALL_RESULT } from "../utils"
 
 import type EVM from "../../evm"
 import type { MachineState } from "../../machine-state/types"
+
+// 0xf0
+export async function CREATE(ms: MachineState, evm: EVM) {
+  const [value, offset, length] = ms.stack.popN(3)
+
+  // todo: generate real address: keccak256(rlp([sender_address,sender_nonce]))[12:]
+  const sender = parsers.hexStringToUint8Array(ms.txData.to)
+  const keccak = parsers.BufferToHexString(Buffer.from(keccak256(sender)))
+  const addressCreated = keccak.substring(0, 42)
+
+  ms.globalState.setAccount(addressCreated, { balance: value })
+
+  const initCode = ms.memory.read(Number(offset), Number(length))
+
+  const createMachineState: MachineState = {
+    ...ms,
+    ...freshExecutionContext(),
+    txData: {
+      ...ms.txData,
+      value: 0n,
+      from: addressCreated,
+      to: addressCreated,
+    },
+    code: initCode,
+  }
+
+  const createResult = await evm.run(createMachineState, true)
+
+  if (createResult.success) {
+    ms.globalState.setAccount(addressCreated, {
+      ...ms.globalState.getAccount(addressCreated),
+      code: parsers.hexStringToUint8Array(createResult.return),
+    })
+
+    ms.stack.push(parsers.HexStringIntoBigInt(addressCreated))
+  } else ms.stack.push(CALL_RESULT.REVERT)
+}
 
 // 0xf1
 export async function CALL(ms: MachineState, evm: EVM) {

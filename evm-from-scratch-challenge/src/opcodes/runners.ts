@@ -44,7 +44,6 @@ const runners: Runners = {
   0x30: { name: "ADDRESS", runner: environmental.ADDRESS },
   0x31: { name: "BALANCE", runner: environmental.BALANCE },
   0x32: { name: "ORIGIN", runner: environmental.ORIGIN },
-
   0x33: { name: "CALLER", runner: environmental.CALLER },
   0x34: { name: "CALLVALUE", runner: environmental.CALLVALUE },
   0x35: { name: "CALLDATALOAD", runner: environmental.CALLDATALOAD },
@@ -52,7 +51,6 @@ const runners: Runners = {
   0x37: { name: "CALLDATACOPY", runner: environmental.CALLDATACOPY },
   0x38: { name: "CODESIZE", runner: environmental.CODESIZE },
   0x39: { name: "CODECOPY", runner: environmental.CODECOPY },
-
   0x3a: { name: "GASPRICE", runner: environmental.GASPRICE },
   0x3b: { name: "EXTCODESIZE", runner: environmental.EXTCODESIZE },
   0x3c: { name: "EXTCODECOPY", runner: environmental.EXTCODECOPY },
@@ -73,7 +71,6 @@ const runners: Runners = {
   0x53: { name: "MSTORE8", runner: memory.MSTORE8 },
   0x54: { name: "SLOAD", runner: storage.SLOAD },
   0x55: { name: "SSTORE", runner: storage.SSTORE },
-
   0x56: { name: "JUMP", runner: controlFlow.JUMP },
   0x57: { name: "JUMPI", runner: controlFlow.JUMPI },
   0x58: { name: "PC", runner: controlFlow.PC },
@@ -86,6 +83,7 @@ const runners: Runners = {
   ...buildOpcodeRangeObjects(0x90, 0x9f, "SWAP", stack.SWAP),
   ...buildOpcodeRangeObjects(0xa0, 0xa4, "LOG", logging.LOG),
 
+  0xf0: { name: "CREATE", runner: system.CREATE },
   0xf1: { name: "CALL", runner: system.CALL },
   0xf3: { name: "RETURN", runner: system.RETURN },
   0xf4: { name: "DELEGATECALL", runner: system.DELEGATECALL },
