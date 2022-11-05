@@ -3,6 +3,7 @@ import { keccak256 } from "ethereum-cryptography/keccak"
 import ERRORS from "../../errors"
 import { freshExecutionContext } from "../../machine-state/utils"
 import { parsers, CALL_RESULT } from "../utils"
+import { ZERO_ADDRESS } from "../../constants"
 
 import type EVM from "../../evm"
 import type { MachineState } from "../../machine-state/types"
@@ -26,7 +27,7 @@ export async function CREATE(ms: MachineState, evm: EVM) {
     txData: {
       ...ms.txData,
       value: 0n,
-      from: addressCreated,
+      from: ZERO_ADDRESS,
       to: addressCreated,
     },
     code: initCode,
