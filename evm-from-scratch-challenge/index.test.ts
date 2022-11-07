@@ -9,7 +9,7 @@ import type { EvmRuntimeParams, Test } from "./src/types"
 
 for (const t of tests as Test[]) {
   test(t.name, async () => {
-    const evm = new EVM({ debug: true, saveLogs: false })
+    const evm = new EVM({ debug: false, saveLogs: false })
 
     const EvmRuntimeParams: EvmRuntimeParams = {
       _code: parsers.hexStringToUint8Array(t.code.bin),
