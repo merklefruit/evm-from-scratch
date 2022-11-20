@@ -38,7 +38,7 @@ Get started by cloning the repo and installing the node dependencies:
 
 ```bash
 git clone https://github.com/nicolas-racchi/evm-from-scratch.git
-cd evm-from-scratch
+cd evm-from-scratch/evm-from-scratch-challenge
 yarn
 ```
 
@@ -57,7 +57,7 @@ If you want to provide additional runtime data, you can use the [input.json](./e
 yarn start:file input.json
 ```
 
-The program will output the step-by-step execution in a `logs` folder in the root directory.
+The program will output the step-by-step execution in a file under the `evm-from-scratch-challenge/logs` directory.
 
 ## Running tests
 
